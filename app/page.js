@@ -23,9 +23,12 @@ export default function Home() {
         <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '24px' }}>
           Projects
         </h2>
-        {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
-        ))}
+        {projects
+          .filter((p) => p.featured)
+          .map((project) => (
+            <ProjectCard key={project.title} project={project} />
+          ))
+        }
       </Section>
 
       {/* Recent Blog Posts - dummy for now */}
