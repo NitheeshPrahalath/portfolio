@@ -1,9 +1,13 @@
 import Container from '../components/Container';
 import Section from '../components/Section';
 import ProjectCard from '../components/ProjectCard';
+import BlogCard from '../components/BlogCard';
 import { projects } from '../data/projects';
+import { getAllPosts } from '../lib/posts';
 
 export default function Home() {
+  const recentPosts = getAllPosts().slice(0, 3);
+
   return (
     <Container>
 
@@ -20,23 +24,26 @@ export default function Home() {
 
       {/* Featured Projects */}
       <Section>
-        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '24px' }}>
-          Projects
-        </h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+          <h2 style={{ fontSize: '22px', fontWeight: '600' }}>Projects</h2>
+          <a href="/projects" style={{ fontSize: '14px', color: '#888' }}>View all →</a>
+        </div>
         {projects
           .filter((p) => p.featured)
           .map((project) => (
             <ProjectCard key={project.title} project={project} />
-          ))
-        }
+          ))}
       </Section>
 
-      {/* Recent Blog Posts - dummy for now */}
+      {/* Recent Blog Posts */}
       <Section>
-        <h2 style={{ fontSize: '22px', fontWeight: '600', marginBottom: '24px' }}>
-          Recent Posts
-        </h2>
-        <p style={{ color: '#888' }}>Blog posts coming soon...</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+          <h2 style={{ fontSize: '22px', fontWeight: '600' }}>Recent Posts</h2>
+          <a href="/blog" style={{ fontSize: '14px', color: '#888' }}>View all →</a>
+        </div>
+        {recentPosts.map((post) => (
+          <BlogCard key={post.slug} post={post} />
+        ))}
       </Section>
 
     </Container>

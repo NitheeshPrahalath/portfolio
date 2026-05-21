@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Container from '../../../components/Container';
 import Section from '../../../components/Section';
 import { getPostBySlug, getAllPosts } from '../../../lib/posts';
@@ -23,6 +24,9 @@ export default async function PostPage({ params }) {
   return (
     <Container>
       <Section>
+        <Link href="/blog" style={{ fontSize: '14px', color: '#888', display: 'inline-block', marginBottom: '32px' }}>
+          ← Back to Blog
+        </Link>
         <p style={{ fontSize: '13px', color: '#aaa', marginBottom: '8px' }}>
           {post.date}
         </p>
@@ -30,6 +34,7 @@ export default async function PostPage({ params }) {
           {post.title}
         </h1>
         <div
+          className="post-content"
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           style={{ lineHeight: '1.8', fontSize: '16px' }}
         />
