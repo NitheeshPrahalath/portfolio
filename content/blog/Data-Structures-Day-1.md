@@ -1,4 +1,9 @@
-# Data Structure
+---
+title: Data Structures - Day 1"
+date: "2026-05-25"
+description: "Interview preparation"
+---
+Data Structure
 
     Data structure is a way to store and organise data so that it can be used effectively.
 
@@ -29,7 +34,6 @@
 **eg**. trees and graphs
 
 ## Algorithm and Abstract data types:
-
 
 ![1779727816116](image/Data-Structures-Day-1/1779727816116.png)
 
