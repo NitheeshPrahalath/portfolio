@@ -56,7 +56,7 @@ export default function AboutPage() {
         </h2>
         <div style={{ display: 'flex', gap: '20px', fontSize: '15px' }}>
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/NitheeshPrahalath"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: '#111', borderBottom: '1px solid #ccc', paddingBottom: '2px' }}
@@ -64,7 +64,7 @@ export default function AboutPage() {
             GitHub
           </a>
           <a
-            href="https://linkedin.com/in/yourusername"
+            href="https://linkedin.com/in/nitheesh-prahalath"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: '#111', borderBottom: '1px solid #ccc', paddingBottom: '2px' }}
@@ -72,7 +72,7 @@ export default function AboutPage() {
             LinkedIn
           </a>
           <a
-            href="/resume.pdf"
+            href="/Nitheesh_Prahalath_Updated_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             style={{ color: '#111', borderBottom: '1px solid #ccc', paddingBottom: '2px' }}
