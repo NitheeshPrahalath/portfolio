@@ -1,3 +1,8 @@
+---
+title: "Nitheesh — Interview & Job Strategy Quick Reference"
+date: "2026-05-27"
+description: "# Interview & Job Strategy Quick Reference"
+---
 # Nitheesh — Interview & Job Strategy Quick Reference
 
 ---
@@ -47,19 +52,24 @@
 ## BEHAVIORAL ANSWERS
 
 ### Tell Me About Yourself
+
 "I'm Nitheesh — Backend & Edge AI Engineer with 1.5 years at Datacorp Traffic in Bangalore. I've built real-time traffic violation detection systems on NVIDIA Jetson edge devices — RTSP streams, YOLOv7/TensorRT inference, radar integration, FastAPI backends, cloud sync. I deployed a system at the Bengaluru Air Force Base. I'm now looking for a product-company role with stronger engineering ownership and architectural depth."
 
 ### Why Are You Switching?
+
 "I want to work in a product-focused environment where I can own larger system components, work on scalable backend challenges, and grow technically at a faster pace. The startup environment was great for real-world exposure — I want to build on that with more structured engineering depth."
 
 ### Biggest Challenge?
+
 Use the triple-camera synchronization or the Air Force Base buffer system:
 "One challenge was synchronizing 3 simultaneous RTSP camera streams with low latency on a Jetson device. I had to architect separate threads for each camera's ingestion, inference, and event generation to prevent any stream from blocking another. Debugging threading race conditions in a real-time system with no tolerance for frame drops was a significant learning experience."
 
 ### Why Should We Hire You?
+
 "I bring production-grade real-time systems experience that most SDE-1 candidates don't have. I've built and shipped systems that run on edge hardware, integrate radar and GPS, and sync to cloud — in real enforcement environments. I'm strong in backend, Linux, and real-time pipelines. I learn fast, communicate clearly, and I can explain my systems in depth."
 
 ### Salary Expectations?
+
 "Based on my experience and the market rate for backend/edge AI roles in Bangalore, I'm looking for 8–12 LPA. I'm open to discussing based on the role's scope and growth trajectory."
 
 ---
@@ -68,36 +78,37 @@ Use the triple-camera synchronization or the Air Force Base buffer system:
 
 ### Python / Backend
 
-| Question | Your Answer Direction |
-|---|---|
-| async vs threading | Async: single-threaded, event loop, good for I/O. Threading: multiple threads, blocked by GIL for CPU tasks. Used threading in Car Interceptor to isolate streams. |
-| What is the GIL? | Global Interpreter Lock — only 1 Python thread runs at a time. For CPU-bound tasks, use multiprocessing. For I/O-bound (RTSP, network), threading still works. |
-| Why FastAPI over Flask? | Async support, Pydantic validation, automatic OpenAPI docs, better performance for real-time systems. |
-| How did you handle queues? | Structured input queues between threads — inference thread reads from a camera queue, event thread reads from inference output queue. |
-| JWT Auth flow? | Client sends credentials → server generates signed JWT → client sends token in header → server verifies signature on each request. |
+| Question                   | Your Answer Direction                                                                                                                                              |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| async vs threading         | Async: single-threaded, event loop, good for I/O. Threading: multiple threads, blocked by GIL for CPU tasks. Used threading in Car Interceptor to isolate streams. |
+| What is the GIL?           | Global Interpreter Lock — only 1 Python thread runs at a time. For CPU-bound tasks, use multiprocessing. For I/O-bound (RTSP, network), threading still works.    |
+| Why FastAPI over Flask?    | Async support, Pydantic validation, automatic OpenAPI docs, better performance for real-time systems.                                                              |
+| How did you handle queues? | Structured input queues between threads — inference thread reads from a camera queue, event thread reads from inference output queue.                             |
+| JWT Auth flow?             | Client sends credentials → server generates signed JWT → client sends token in header → server verifies signature on each request.                              |
 
 ### Edge AI
 
-| Question | Your Answer Direction |
-|---|---|
-| Why TensorRT? | Optimizes model for GPU inference — layer fusion, precision calibration (FP16/INT8). Significantly reduces latency on Jetson. |
-| Why YOLOv7? | Best accuracy/speed tradeoff for real-time multi-class object detection at the time. |
-| How did you optimize FPS? | TensorRT acceleration, threaded stream processing, batching where possible, reducing non-essential preprocessing. |
+| Question                  | Your Answer Direction                                                                                                                      |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Why TensorRT?             | Optimizes model for GPU inference — layer fusion, precision calibration (FP16/INT8). Significantly reduces latency on Jetson.             |
+| Why YOLOv7?               | Best accuracy/speed tradeoff for real-time multi-class object detection at the time.                                                       |
+| How did you optimize FPS? | TensorRT acceleration, threaded stream processing, batching where possible, reducing non-essential preprocessing.                          |
 | How was radar integrated? | Radar outputs speed + position data. We correlated this with vehicle detection bounding boxes from YOLO to map speed to specific vehicles. |
 
 ### DBMS
 
-| Question | Your Answer Direction |
-|---|---|
-| Indexing? | Creates data structure for faster lookups. Used on plate number, timestamp, vehicle ID columns for fast event queries. |
-| ACID? | Atomicity, Consistency, Isolation, Durability — guarantees transaction reliability. |
-| JOIN types? | INNER: matching rows only. LEFT: all from left, matching from right. Used LEFT JOIN for event + sync status queries. |
+| Question    | Your Answer Direction                                                                                                  |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Indexing?   | Creates data structure for faster lookups. Used on plate number, timestamp, vehicle ID columns for fast event queries. |
+| ACID?       | Atomicity, Consistency, Isolation, Durability — guarantees transaction reliability.                                   |
+| JOIN types? | INNER: matching rows only. LEFT: all from left, matching from right. Used LEFT JOIN for event + sync status queries.   |
 
 ---
 
 ## COMPANY TARGETING QUICK LIST
 
 **Search these keywords on LinkedIn/Wellfound:**
+
 - Edge AI Bangalore
 - Computer vision engineer Bangalore
 - Video analytics startup Bangalore
@@ -108,21 +119,22 @@ Use the triple-camera synchronization or the Air Force Base buffer system:
 - Surveillance tech startup
 
 **Cold message template (copy-paste ready):**
+
 > Hi [Name], I'm a Backend & Edge AI Engineer with 1.5 years of production experience building real-time computer vision systems on NVIDIA Jetson devices (YOLOv7, TensorRT, RTSP, FastAPI, radar integration). Actively looking for SDE-1 or Edge AI roles in Bangalore. Would love to connect if [Company] has relevant openings — happy to share my resume. Thanks!
 
 ---
 
 ## WEEKLY MINIMUM NON-NEGOTIABLES
 
-| Day | Minimum |
-|---|---|
-| Monday | 1 DSA problem + 20 mins DBMS |
-| Tuesday | 30 mins FastAPI/Python concept |
-| Wednesday | 30 mins project work |
-| Thursday | 1 DSA problem |
-| Friday | 15 mins speak about your projects aloud |
-| Saturday | 2 DSA problems + 1 job application |
-| Sunday | 1 mock interview round |
+| Day       | Minimum                                 |
+| --------- | --------------------------------------- |
+| Monday    | 1 DSA problem + 20 mins DBMS            |
+| Tuesday   | 30 mins FastAPI/Python concept          |
+| Wednesday | 30 mins project work                    |
+| Thursday  | 1 DSA problem                           |
+| Friday    | 15 mins speak about your projects aloud |
+| Saturday  | 2 DSA problems + 1 job application      |
+| Sunday    | 1 mock interview round                  |
 
 ---
 
