@@ -1,11 +1,8 @@
 ---
-titile: "Objects Methods Prototypes Constuctors"
+title: "Objects Methods Prototypes Constuctors"
 date: "2026-05-31"
 description: "Javascript Methods, Objects and Constructors"
 ---
-
-Natsu,
-
 # JavaScript Objects, Constructors, Methods & Prototypes — Complete Summary
 
 Before understanding prototypes, you need to understand  **objects** ,  **methods** , and  **constructors** .
