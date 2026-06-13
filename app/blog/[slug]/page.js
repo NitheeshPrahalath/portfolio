@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   return {
-    title: `${post.title} | Natsu`,
+    title: `${post.title} | Nitheesh Prahalath`,
     description: post.description,
   };
 }

@@ -8,7 +8,7 @@ export default function Footer() {
       fontSize: '14px',
       color: '#888',
     }}>
-      <p>Built by Natsu · {new Date().getFullYear()}</p>
+      <p>Built by Nitheesh Prahalath · {new Date().getFullYear()}</p>
     </footer>
   );
 }

@@ -22,7 +22,7 @@ Example:
 
 ```js
 const person = {
-  name: "Natsu",
+  name: "Nitheesh Prahalath",
   age: 25,
 
   greet() {
@@ -37,7 +37,7 @@ Here:
 Object: person
 
 Properties:
-- name = "Natsu"
+- name = "Nitheesh Prahalath"
 - age = 25
 
 Method:
@@ -47,7 +47,7 @@ Method:
 Usage:
 
 ```js
-console.log(person.name); // Natsu
+console.log(person.name); // Nitheesh Prahalath
 
 person.greet(); // Hello!
 ```
@@ -89,7 +89,7 @@ Example:
 
 ```js
 const person = {
-  name: "Natsu",
+  name: "Nitheesh Prahalath",
 
   greet() {
     console.log(`Hello, I am ${this.name}`);
@@ -114,7 +114,7 @@ person.greet();
 Output:
 
 ```text
-Hello, I am Natsu
+Hello, I am Nitheesh Prahalath
 ```
 
 ### Difference between Function and Method
@@ -245,7 +245,7 @@ Example:
 
 ```js
 const person = {
-  name: "Natsu"
+  name: "Nitheesh Prahalath"
 };
 ```
 

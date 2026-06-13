@@ -34,7 +34,7 @@ export default function Navbar() {
         alignItems: 'center',
       }}>
         <Link href="/" style={{ fontWeight: '700', fontSize: '18px', color: '#1a1a2e' }}>
-          Natsu
+          Nitheesh Prahalath
         </Link>
         <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
           <Link href="/about" style={linkStyle('/about')}>About</Link>

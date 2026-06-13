@@ -28,7 +28,7 @@ export default function Home() {
           Learning in public
         </div>
         <h1 className="fade-up fade-up-2" style={{ fontSize: '36px', fontWeight: '700', marginBottom: '16px', color: '#1a1a2e' }}>
-          Hey, I'm <span style={{ color: '#4f6ef7' }}>Natsu</span> 👋
+          Hey, I'm <span style={{ color: '#4f6ef7' }}>Nitheesh Prahalath</span> 👋
         </h1>
         <p className="fade-up fade-up-3" style={{ fontSize: '18px', color: '#556', maxWidth: '540px', marginBottom: '28px' }}>
           I'm learning to build things on the web. This is my space to document

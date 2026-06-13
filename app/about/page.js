@@ -2,7 +2,7 @@ import Container from '../../components/Container';
 import Section from '../../components/Section';
 
 export const metadata = {
-  title: 'About | Natsu',
+  title: 'About | Nitheesh Prahalath',
   description: 'About me',
 };
 
@@ -18,7 +18,7 @@ export default function AboutPage() {
         </h1>
 
         <p style={{ fontSize: '17px', color: '#444', marginBottom: '40px', maxWidth: '560px' }}>
-          I'm Natsu — a self-taught developer learning to build on the web.
+          I'm Nitheesh Prahalath — a self-taught developer learning to build on the web.
           I document my progress publicly so others on the same path can find it useful.
         </p>
 
