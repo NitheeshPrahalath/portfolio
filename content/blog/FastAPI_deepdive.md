@@ -1,9 +1,8 @@
 ---
 title: "FastAPI Deepdive - Day 1"
-date: "10-06-2026"
+date: "2026-06-10"
 description: "A deepdive on FastAPI - "
 ---
-
 ## Topic 1: What is FastAPI & The ASGI Foundation
 
 At its core, **FastAPI** is a wrapper. It isn't a server and it isn't a low-level web framework. It sits on top of two giants:
@@ -70,7 +69,6 @@ Before we move to **Async I/O vs. Blocking I/O** (where we'll discuss the "Event
 
 1. If you have a very heavy calculation (CPU-bound), does `async def` help you?
 2. In the lifecycle above, where do you think **Pydantic** does its work?
-
 
 You are spot on with **Question 2!** Pydantic acts as the guard right before the request hits your path operation function. If the JSON is bad, it halts the lifecycle early and returns a `422 Unprocessable Entity` status without ever running your business logic.
 
