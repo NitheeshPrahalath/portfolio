@@ -28,7 +28,7 @@ export default async function PostPage({ params }) {
           ← Back to Blog
         </Link>
         <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px' }}>
-          {post.date}
+          {post.date} · {post.readingTime}
         </p>
         <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '32px', color: 'var(--text-primary)' }}>
           {post.title}

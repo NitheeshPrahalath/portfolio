@@ -23,7 +23,9 @@ export default function BlogCard({ post }) {
         }}
       >
         <div>
-          <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '4px' }}>{post.date}</p>
+          <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '4px' }}>
+            {post.date} · {post.readingTime}
+          </p>          
           <h3 style={{
             fontSize: '17px',
             fontWeight: '600',
