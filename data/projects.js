@@ -5,7 +5,7 @@ export const projects = [
     tech: ["Next.js", "CSS"],
     github: "https://github.com/yourusername/portfolio",
     live: "",
-    featured: true,       // ← add this
+    featured: true,
   },
   {
     title: "Project Two",
@@ -13,6 +13,14 @@ export const projects = [
     tech: ["HTML", "CSS", "JavaScript"],
     github: "https://github.com/yourusername/project-two",
     live: "",
-    featured: false,      // ← add this
+    featured: false,
+  },
+  {
+    title: "Project Three",
+    description: "Another project description goes here.",
+    tech: ["React", "JavaScript"],
+    github: "https://github.com/yourusername/project-three",
+    live: "",
+    featured: false,
   },
 ];

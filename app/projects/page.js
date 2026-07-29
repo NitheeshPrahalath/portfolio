@@ -1,6 +1,6 @@
 import Container from '../../components/Container';
 import Section from '../../components/Section';
-import ProjectCard from '../../components/ProjectCard';
+import ProjectList from '../../components/ProjectList';
 import { projects } from '../../data/projects';
 
 export const metadata = {
@@ -18,9 +18,7 @@ export default function ProjectsPage() {
         <p style={{ color: 'var(--text-muted)', marginBottom: '40px' }}>
           Things I've built while learning.
         </p>
-        {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
-        ))}
+        <ProjectList projects={projects} />
       </Section>
     </Container>
   );
