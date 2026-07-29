@@ -18,7 +18,7 @@ export default function AboutPage() {
           About Me
         </h1>
         <p style={{ fontSize: '17px', color: 'var(--text-secondary)', marginBottom: '40px', maxWidth: '560px' }}>
-          I'm Natsu — a self-taught developer learning to build on the web.
+          I'm Nitheesh Prahalath — a self-taught developer learning to build on the web.
           I document my progress publicly so others on the same path can find it useful.
         </p>
 
