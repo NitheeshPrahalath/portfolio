@@ -24,19 +24,19 @@ export default async function PostPage({ params }) {
   return (
     <Container>
       <Section>
-        <Link href="/blog" style={{ fontSize: '14px', color: '#888', display: 'inline-block', marginBottom: '32px' }}>
+        <Link href="/blog" style={{ fontSize: '14px', color: 'var(--text-muted)', display: 'inline-block', marginBottom: '32px' }}>
           ← Back to Blog
         </Link>
-        <p style={{ fontSize: '13px', color: '#aaa', marginBottom: '8px' }}>
+        <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '8px' }}>
           {post.date}
         </p>
-        <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '32px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '32px', color: 'var(--text-primary)' }}>
           {post.title}
         </h1>
         <div
           className="post-content"
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-          style={{ lineHeight: '1.8', fontSize: '16px' }}
+          style={{ lineHeight: '1.8', fontSize: '16px', color: 'var(--text-secondary)' }}
         />
       </Section>
     </Container>

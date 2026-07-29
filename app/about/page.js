@@ -12,75 +12,48 @@ export default function AboutPage() {
   return (
     <Container>
       <Section>
-
-        <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '16px' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>
           About Me
         </h1>
-
-        <p style={{ fontSize: '17px', color: '#444', marginBottom: '40px', maxWidth: '560px' }}>
-          I'm Nitheesh Prahalath — a self-taught developer learning to build on the web.
+        <p style={{ fontSize: '17px', color: 'var(--text-secondary)', marginBottom: '40px', maxWidth: '560px' }}>
+          I'm Natsu — a self-taught developer learning to build on the web.
           I document my progress publicly so others on the same path can find it useful.
         </p>
 
-        <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px' }}>
+        <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary)' }}>
           Currently Learning
         </h2>
-        <ul style={{ paddingLeft: '20px', color: '#555', marginBottom: '40px', lineHeight: '2' }}>
+        <ul style={{ paddingLeft: '20px', color: 'var(--text-secondary)', marginBottom: '40px', lineHeight: '2' }}>
           <li>React & Next.js</li>
           <li>Building real projects from scratch</li>
           <li>Writing about what I learn</li>
         </ul>
 
-        <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px' }}>
+        <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary)' }}>
           Skills
         </h2>
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '40px' }}>
           {skills.map((skill) => (
-            <span
-              key={skill}
-              style={{
-                background: '#f0f0f0',
-                padding: '4px 14px',
-                borderRadius: '999px',
-                fontSize: '14px',
-                color: '#333',
-              }}
-            >
+            <span key={skill} style={{
+              background: 'var(--accent-light)',
+              color: 'var(--accent)',
+              padding: '4px 14px',
+              borderRadius: '999px',
+              fontSize: '14px',
+            }}>
               {skill}
             </span>
           ))}
         </div>
 
-        <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px' }}>
+        <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary)' }}>
           Find Me
         </h2>
         <div style={{ display: 'flex', gap: '20px', fontSize: '15px' }}>
-          <a
-            href="https://github.com/NitheeshPrahalath"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#111', borderBottom: '1px solid #ccc', paddingBottom: '2px' }}
-          >
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com/in/nitheesh-prahalath"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#111', borderBottom: '1px solid #ccc', paddingBottom: '2px' }}
-          >
-            LinkedIn
-          </a>
-          <a
-            href="/Nitheesh_Prahalath_Updated_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: '#111', borderBottom: '1px solid #ccc', paddingBottom: '2px' }}
-          >
-            Resume ↓
-          </a>
+          <a href="https://github.com/NitheeshPrahalath" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', borderBottom: '1px solid var(--border)', paddingBottom: '2px' }}>GitHub</a>
+          <a href="https://linkedin.com/in/nitheesh-prahalath" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', borderBottom: '1px solid var(--border)', paddingBottom: '2px' }}>LinkedIn</a>
+          <a href="/Nitheesh_Prahalath_Updated_Resume.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', borderBottom: '1px solid var(--border)', paddingBottom: '2px' }}>Resume ↓</a>
         </div>
-
       </Section>
     </Container>
   );

@@ -12,7 +12,7 @@ export default function BlogCard({ post }) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          borderBottom: '1px solid #dde5ff',
+          borderBottom: '1px solid var(--border)',
           padding: '20px 0',
           display: 'flex',
           justifyContent: 'space-between',
@@ -23,20 +23,20 @@ export default function BlogCard({ post }) {
         }}
       >
         <div>
-          <p style={{ fontSize: '13px', color: '#8892b0', marginBottom: '4px' }}>{post.date}</p>
+          <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '4px' }}>{post.date}</p>
           <h3 style={{
             fontSize: '17px',
             fontWeight: '600',
             marginBottom: '6px',
-            color: hovered ? '#4f6ef7' : '#1a1a2e',
+            color: hovered ? 'var(--accent)' : 'var(--text-primary)',
             transition: 'color 0.2s',
           }}>
             {post.title}
           </h3>
-          <p style={{ color: '#778', fontSize: '14px' }}>{post.description}</p>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>{post.description}</p>
         </div>
         <span style={{
-          color: '#4f6ef7',
+          color: 'var(--accent)',
           fontSize: '18px',
           opacity: hovered ? 1 : 0,
           transition: 'opacity 0.2s',

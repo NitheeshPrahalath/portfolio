@@ -8,20 +8,20 @@ export const metadata = {
   description: 'Writing about what I learn',
 };
 
-export default function BlogPage(){
+export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
     <Container>
-      <Section> 
-        <h1 style={{fontsize: '32px', fontWeight: '700', marginBottom: '8px', color: '#1a1a2e'}}>
+      <Section>
+        <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>
           Blog
-          </h1>
-          <p style={{color:'#8892b0', marginBottom:'40px'}}>
-            Writing about what I'm Learning, one post at a time.
-          </p>
-          <BlogList posts={posts}/>
+        </h1>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '40px' }}>
+          Writing about what I'm learning, one post at a time.
+        </p>
+        <BlogList posts={posts} />
       </Section>
     </Container>
-  )
+  );
 }
