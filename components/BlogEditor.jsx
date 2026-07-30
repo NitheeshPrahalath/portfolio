@@ -201,6 +201,23 @@ export default function BlogEditor() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+
+        {/* Auto date display — add this */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          marginTop: '4px',
+          padding: '8px 14px',
+          background: 'var(--accent-light)',
+          borderRadius: '8px',
+          fontSize: '13px',
+          color: 'var(--accent)',
+        }}>
+          <span>📅</span>
+          <span>Will be published with today's date: <strong>{getToday()}</strong></span>
+        </div>
+        
         {title && (
           <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
             Slug: <span style={{ color: 'var(--accent)' }}>{generateSlug(title)}</span>

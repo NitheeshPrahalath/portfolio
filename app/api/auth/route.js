@@ -1,15 +1,12 @@
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 import { sessionOptions } from '../../../lib/session';
-import bcrypt from 'bcryptjs';
 
 export async function POST(request) {
   const { password } = await request.json();
   const session = await getIronSession(await cookies(), sessionOptions);
 
-  const isValid = await bcrypt.compare(password, process.env.ADMIN_PASSWORD);
-
-  if (isValid) {
+  if (password === process.env.ADMIN_PASSWORD) {
     session.isAdmin = true;
     await session.save();
     return Response.json({ success: true });
