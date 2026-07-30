@@ -1,6 +1,7 @@
 import Container from '../../components/Container';
 import Section from '../../components/Section';
 import ContactForm from '../../components/ContactForm';
+import CopyEmail from '../../components/CopyEmail';
 
 export const metadata = {
   title: 'About | Nitheesh Prahalath',
@@ -17,7 +18,7 @@ export default function AboutPage() {
           About Me
         </h1>
         <p style={{ fontSize: '17px', color: 'var(--text-secondary)', marginBottom: '40px', maxWidth: '560px' }}>
-          I'm Natsu — a self-taught developer learning to build on the web.
+          I'm Nitheesh Prahalath — a self-taught developer learning to build on the web.
           I document my progress publicly so others on the same path can find it useful.
         </p>
 
@@ -55,6 +56,7 @@ export default function AboutPage() {
           <a href="https://linkedin.com/in/nitheesh-prahalath" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', borderBottom: '1px solid var(--border)', paddingBottom: '2px' }}>LinkedIn</a>
           <a href="/Nitheesh_Prahalath_Updated_Resume.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', borderBottom: '1px solid var(--border)', paddingBottom: '2px' }}>Resume ↓</a>
         </div>
+        <CopyEmail email="nitheeshprahalathcs@email.com" />
         <h2 style={{ fontSize: '20px', fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary)', marginTop: '40px' }}>
           Get In Touch
         </h2>
