@@ -2,6 +2,7 @@
 title: "Data Structures Day 3"
 date: "2026-05-30"
 description: "Solved Linked List Cycle 2 using Floyd's Algorithm"
+tags: ["Data Structures", "DSA", "Algorithms", "Linked List"]
 ---
 # Floyd's Cycle Detection Algorithm or Tortoise and Hare
 

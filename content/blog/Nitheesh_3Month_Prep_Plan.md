@@ -2,6 +2,7 @@
 title: "Nitheesh — 3-Month Job Switch Prep Plan"
 date: "2026-05-27"
 description: "# 3-Month Job Switch Prep Plan"
+tags: ["Career", "Interview Preparation", "Study Plan", "DSA"]
 ---
 # Nitheesh — 3-Month Job Switch Prep Plan
 

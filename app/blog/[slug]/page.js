@@ -13,9 +13,25 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
+  const siteUrl = 'https://portfolio-theta-gray-6qan0q1mpo.vercel.app/';
+
   return {
     title: `${post.title} | Nitheesh Prahalath`,
     description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: `${siteUrl}/blog/${post.slug}`,
+      siteName: 'Nitheesh Prahalath | Portfolio',
+      type: 'article',
+      publishedTime: post.date,
+      tags: post.tags,
+    },
+    twitter: {
+      card: 'summary',
+      title: post.title,
+      description: post.description,
+    },
   };
 }
 
@@ -40,6 +56,23 @@ export default async function PostPage({ params }) {
           <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '32px', color: 'var(--text-primary)' }}>
             {post.title}
           </h1>
+          {/* Tags */}
+          {post.tags?.length > 0 && (
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '32px' }}>
+              {post.tags.map((tag) => (
+                <span key={tag} style={{
+                  background: 'var(--accent-light)',
+                  color: 'var(--accent)',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  padding: '3px 12px',
+                  borderRadius: '999px',
+                }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
           <div
             className="post-content"
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}

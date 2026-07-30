@@ -2,6 +2,7 @@
 title: "Nitheesh — Interview & Job Strategy Quick Reference"
 date: "2026-05-27"
 description: "# Interview & Job Strategy Quick Reference"
+tags: ["Career", "Interview Preparation", "Job Strategy"]
 ---
 # Nitheesh — Interview & Job Strategy Quick Reference
 

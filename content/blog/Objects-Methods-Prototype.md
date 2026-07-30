@@ -2,6 +2,7 @@
 title: "Objects Methods Prototypes Constuctors"
 date: "2026-05-31"
 description: "Javascript Methods, Objects and Constructors"
+tags: ["JavaScript", "Objects", "Prototypes", "OOP"]
 ---
 # JavaScript Objects, Constructors, Methods & Prototypes — Complete Summary
 

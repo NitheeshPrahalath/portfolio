@@ -2,6 +2,7 @@
 title: "Learning React Day 3"
 date: "2026-06-10"
 description: "Learning props"
+tags: ["React", "Props", "JavaScript", "Beginner"]
 ---
 # Chapter 6: Displaying Data with Props (React)
 

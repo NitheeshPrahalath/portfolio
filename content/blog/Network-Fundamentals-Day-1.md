@@ -2,6 +2,7 @@
 title: "Network Fundamentals Day 1"
 date: "2026-05-28"
 description: "Networking"
+tags: ["Networking", "Computer Networks", "Interview Preparation"]
 ---
 
 # Computer Networking

@@ -2,6 +2,7 @@
 title: "FastAPI Deepdive - Day 1"
 date: "2026-06-10"
 description: "A deepdive on FastAPI - "
+tags: ["FastAPI", "Python", "Backend", "Async", "ASGI"]
 ---
 ## Topic 1: What is FastAPI & The ASGI Foundation
 

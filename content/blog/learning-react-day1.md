@@ -2,6 +2,7 @@
 title: "Learning React - Day 1"
 date: "2026-05-21"
 description: "First steps into React and Next.js"
+tags: ["React", "Next.js", "JavaScript", "Beginner"]
 ---
 Today I set up my portfolio project using Next.js. Here's what I learned.
 

@@ -2,6 +2,7 @@
 title: "Learning React Day 2"
 date: "2026-05-31"
 description: "Day 2"
+tags: ["React", "JSX", "JavaScript", "Babel", "Beginner"]
 ---
 
 # Chapter 4 : Getting Started with React

@@ -2,6 +2,7 @@
 title: Data Structures - Day 2"
 date: "2026-05-26"
 description: "Interview preparation"
+tags: ["Data Structures", "DSA", "Interview Preparation"]
 ---
 # Need for Data Structures
 

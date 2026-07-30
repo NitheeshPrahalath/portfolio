@@ -2,6 +2,7 @@
 title: "WebSocket"
 date: "2026-07-30"
 description: "WebSocket from scratch"
+tags: ["WebSocket", "Networking", "Real-time", "JavaScript"]
 ---
 
 Natsu, let's learn **WebSockets from scratch**, assuming you know basic programming but nothing about WebSockets.

@@ -6,6 +6,19 @@ import Providers from '../components/Providers';
 export const metadata = {
   title: 'Nitheesh Prahalath | Portfolio',
   description: 'My personal portfolio and blog',
+  openGraph: {
+    siteName: 'Nitheesh Prahalath | Portfolio',
+    type: 'website',
+    url: 'https://portfolio-theta-gray-6qan0q1mpo.vercel.app/',
+  },
+  twitter: {
+    card: 'summary',
+  },
+  alternates: {
+    types: {
+      'application/rss+xml': '/feed.xml',
+    },
+  },
 };
 
 export default function RootLayout({ children }) {

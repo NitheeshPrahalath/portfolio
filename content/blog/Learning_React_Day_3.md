@@ -2,6 +2,7 @@
 title: "Learning React Day 3"
 date: "2026-06-16"
 description: "Day 3"
+tags: ["React", "Props", "State", "JavaScript", "Next.js"]
 ---
 # Chapter 6: Displaying Data with Props (React)
 

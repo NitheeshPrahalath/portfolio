@@ -12,6 +12,7 @@ export default function BlogEditor() {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('write');
+  const [tags, setTags] = useState('');
 
   const generateSlug = (text) =>
     text.toLowerCase().trim()
@@ -38,6 +39,7 @@ export default function BlogEditor() {
         content,
         slug: generateSlug(title),
         date: getToday(),
+        tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
       }),
     });
 
@@ -200,6 +202,14 @@ export default function BlogEditor() {
           placeholder="One line summary"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+        />
+        <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '4px' }}>Tags</div>
+        <input
+          style={inputStyle}
+          type="text"
+          placeholder="React, Next.js, Beginner  (comma separated)"
+          value={tags}
+          onChange={(e) => setTags(e.target.value)}
         />
 
         {/* Auto date display — add this */}

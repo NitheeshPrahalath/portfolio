@@ -2,6 +2,7 @@
 title: Data Structures - Day 1"
 date: "2026-05-25"
 description: "Interview preparation"
+tags: ["Data Structures", "DSA", "Interview Preparation"]
 ---
 Data Structure
 

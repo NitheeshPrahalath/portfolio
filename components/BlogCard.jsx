@@ -22,7 +22,7 @@ export default function BlogCard({ post }) {
           cursor: 'pointer',
         }}
       >
-        <div>
+        <div style={{ flex: 1 }}>
           <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '4px' }}>
             {post.date} · {post.readingTime}
           </p>          
@@ -35,7 +35,25 @@ export default function BlogCard({ post }) {
           }}>
             {post.title}
           </h3>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>{post.description}</p>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '10px' }}>
+            {post.description}
+          </p>
+          {post.tags?.length > 0 && (
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+              {post.tags.map((tag) => (
+                <span key={tag} style={{
+                  background: 'var(--accent-light)',
+                  color: 'var(--accent)',
+                  fontSize: '11px',
+                  fontWeight: '600',
+                  padding: '2px 10px',
+                  borderRadius: '999px',
+                }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
         <span style={{
           color: 'var(--accent)',

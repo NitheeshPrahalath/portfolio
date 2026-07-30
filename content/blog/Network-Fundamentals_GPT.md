@@ -2,6 +2,7 @@
 title: "Network Fundamentals GPT Day 1"
 date: "2026-05-28"
 description: "Networking"
+tags: ["Networking", "HTTP", "TCP/IP", "DNS", "Interview Preparation"]
 ---
 Nitheesh Prahalath, here’s a focused, interview-oriented revision guide for core networking fundamentals that most backend, full-stack, distributed systems, and platform engineering interviews expect.
 

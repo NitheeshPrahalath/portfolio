@@ -9,16 +9,17 @@ export async function POST(request) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const { title, date, description, content, slug } = await request.json();
+  const { title, date, description, content, slug, tags } = await request.json();
+  const tagsLine = tags?.length ? `\ntags: [${tags.map(t => `"${t}"`).join(', ')}]` : '';
 
   // Build the markdown file content
   const fileContent = `---
-title: "${title}"
-date: "${date}"
-description: "${description}"
----
+  title: "${title}"
+  date: "${date}"
+  description: "${description}"${tagsLine}
+  ---
 
-${content}`;
+  ${content}`;
 
   // Convert to base64 — GitHub API requires this
   const base64Content = Buffer.from(fileContent).toString('base64');

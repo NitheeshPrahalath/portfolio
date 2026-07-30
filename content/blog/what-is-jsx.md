@@ -2,6 +2,7 @@
 title: "What is JSX?"
 date: "2026-05-22"
 description: "Understanding JSX and why React uses it"
+tags: ["React", "JSX", "JavaScript"]
 ---
 
 JSX looks like HTML but it's actually JavaScript.
