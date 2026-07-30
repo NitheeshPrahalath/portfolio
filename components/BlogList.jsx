@@ -23,17 +23,16 @@ export default function BlogList({ posts}) {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{
-                    width: '100%',
+                    flex: 1,
                     padding: '10px 16px',
                     borderRadius: '8px',
-                    border: '1px solid #dde5ff',
-                    background: '#fff',
+                    border: '1px solid var(--border)',
+                    background: 'var(--bg-card)',
                     fontSize: '15px',
-                    color: '#1a1a2e',
-                    marginBottom: '24px',
+                    color: 'var(--text-primary)',
                     outline: 'none',
                 }}
-            />
+                />
 
             {/* Sort Buttons */}
             <button
@@ -41,9 +40,9 @@ export default function BlogList({ posts}) {
                 style={{
                     padding: '10px 16px',
                     borderRadius: '8px',
-                    border: '1px solid #dde5ff',
-                    background: sortOrder === 'newest' ? '#4f6ef7' : '#fff',
-                    color: sortOrder === 'newest' ? '#fff' : '#8892b0',
+                    border: '1px solid var(--border)',
+                    background: sortOrder === 'newest' ? 'var(--accent)' : 'var(--bg-card)',
+                    color: sortOrder === 'newest' ? '#fff' : 'var(--text-muted)',
                     fontSize: '14px',
                     fontWeight: '500',
                     cursor: 'pointer',
@@ -57,9 +56,9 @@ export default function BlogList({ posts}) {
                 style={{
                     padding: '10px 16px',
                     borderRadius: '8px',
-                    border: '1px solid #dde5ff',
-                    background: sortOrder === 'oldest' ? '#4f6ef7' : '#fff',
-                    color: sortOrder === 'oldest' ? '#fff' : '#8892b0',
+                    border: '1px solid var(--border)',
+                    background: sortOrder === 'oldest' ? 'var(--accent)' : 'var(--bg-card)',
+                    color: sortOrder === 'oldest' ? '#fff' : 'var(--text-muted)',
                     fontSize: '14px',
                     fontWeight: '500',
                     cursor: 'pointer',

@@ -13,7 +13,7 @@ export default function ProjectsPage() {
   return (
     <Container>
       <Section>
-        <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>
+        <h1 className="fade-up fade-up-1"style={{ fontSize: '32px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>
           Projects
         </h1>
         <p style={{ color: 'var(--text-muted)', marginBottom: '40px' }}>

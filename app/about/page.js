@@ -14,7 +14,7 @@ export default function AboutPage() {
   return (
     <Container>
       <Section>
-        <h1 style={{ fontSize: '32px', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>
+        <h1 className="fade-up fade-up-1" style={{ fontSize: '32px', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>
           About Me
         </h1>
         <p style={{ fontSize: '17px', color: 'var(--text-secondary)', marginBottom: '40px', maxWidth: '560px' }}>

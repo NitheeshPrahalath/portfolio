@@ -87,6 +87,25 @@ img {
   display: block;
 }
 
+/* ========================================
+   Project Card
+======================================== */
+
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 16px;
+  background: var(--bg-card);
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(79, 110, 247, 0.12);
+}
 
 /* ========================================
    Blog Post Content
@@ -169,6 +188,12 @@ img {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 .fade-up {

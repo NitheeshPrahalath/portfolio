@@ -15,7 +15,7 @@ export default function ContactForm() {
     setStatus('loading');
 
     try {
-      const res = await fetch('https://formspree.io/f/mykrveko', {
+      const res = await fetch(process.env.NEXT_PUBLIC_FORMSPREE_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
