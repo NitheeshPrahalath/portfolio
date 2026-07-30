@@ -46,7 +46,7 @@ export default function TableOfContents({ headings }) {
         On this page
       </p>
       {headings.map((heading) => (
-        
+        <a
           key={heading.id}
           href={`#${heading.id}`}
           style={{
