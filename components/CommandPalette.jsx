@@ -49,12 +49,20 @@ export default function CommandPalette({ items }) {
     };
   }, []);
 
+  // Reset query/selection whenever the palette opens
+  const [prevOpen, setPrevOpen] = useState(open);
+  if (open !== prevOpen) {
+    setPrevOpen(open);
+    if (open) {
+      setQuery('');
+      setActiveIndex(0);
+    }
+  }
+
   // Focus input when opened
   useEffect(() => {
     if (open) {
       setTimeout(() => inputRef.current?.focus(), 50);
-      setQuery('');
-      setActiveIndex(0);
     }
   }, [open]);
 
@@ -88,7 +96,10 @@ export default function CommandPalette({ items }) {
   };
 
   // Reset active index when query changes
-  useEffect(() => { setActiveIndex(0); }, [query]);
+  const handleQueryChange = (e) => {
+    setQuery(e.target.value);
+    setActiveIndex(0);
+  };
 
   if (!open) return null;
 
@@ -134,7 +145,7 @@ export default function CommandPalette({ items }) {
           <input
             ref={inputRef}
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={handleQueryChange}
             onKeyDown={handleKeyDown}
             placeholder="Search pages, projects, posts..."
             style={{
@@ -178,7 +189,7 @@ export default function CommandPalette({ items }) {
               color: 'var(--text-muted)',
               fontSize: '14px',
             }}>
-              No results for "{query}"
+              No results for &quot;{query}&quot;
             </div>
           ) : (
             filtered.map((item, index) => (

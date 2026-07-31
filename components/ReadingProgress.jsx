@@ -9,7 +9,7 @@ export default function ReadingProgress() {
     const updateProgress = () => {
       const scrolled = window.scrollY;
       const total = document.documentElement.scrollHeight - window.innerHeight;
-      const percentage = (scrolled / total) * 100;
+      const percentage = total > 0 ? (scrolled / total) * 100 : 0;
       setProgress(percentage);
     };
 

@@ -34,6 +34,8 @@ export default async function GitHubFeed({ username }) {
   };
 
   const getTimeAgo = (dateString) => {
+    // Server component: relative time is computed once per cached render, so Date.now() is intentional here.
+    // eslint-disable-next-line react-hooks/purity
     const diff = Date.now() - new Date(dateString).getTime();
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor(diff / (1000 * 60 * 60));

@@ -18,7 +18,7 @@ export default function BlogPage() {
           Blog
         </h1>
         <p style={{ color: 'var(--text-muted)', marginBottom: '40px' }}>
-          Writing about what I'm learning, one post at a time.
+          Writing about what I&apos;m learning, one post at a time.
         </p>
         <BlogList posts={posts} />
       </Section>

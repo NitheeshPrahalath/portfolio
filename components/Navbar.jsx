@@ -3,18 +3,24 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => { setMounted(true); }, []);
-
-  // Close menu on route change
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
+  // Close menu when the route changes
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setMenuOpen(false);
+  }
 
   const isActive = (path) => pathname === path || pathname.startsWith(path + '/');
 
@@ -131,6 +137,8 @@ export default function Navbar() {
             )}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-drawer"
               style={{
                 background: 'none',
                 border: 'none',
@@ -150,7 +158,11 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile drawer */}
-      <div style={{
+      <div
+        id="mobile-drawer"
+        inert={!menuOpen}
+        aria-hidden={!menuOpen}
+        style={{
         position: 'fixed',
         top: 0,
         left: 0,
@@ -161,6 +173,7 @@ export default function Navbar() {
         padding: '80px 32px 32px',
         transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
         transition: 'transform 0.3s ease',
+        visibility: menuOpen ? 'visible' : 'hidden',
       }}>
         <Link href="/" style={mobileLinkStyle('/')}>Home</Link>
         <Link href="/about" style={mobileLinkStyle('/about')}>About</Link>

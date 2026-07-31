@@ -27,11 +27,11 @@ export default function Home() {
           Learning in public
         </div>
         <h1 className="fade-up fade-up-2" style={{ fontSize: '36px', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>
-          Hey, I'm <span style={{ color: 'var(--accent)' }}>Nitheesh Prahalath</span> 👋
+          Hey, I&apos;m <span style={{ color: 'var(--accent)' }}>Nitheesh Prahalath</span> 👋
         </h1>
         <p className="fade-up fade-up-3" style={{ fontSize: '18px', color: 'var(--text-secondary)', maxWidth: '540px', marginBottom: '28px' }}>
-          I'm learning to build things on the web. This is my space to document
-          projects, write about what I'm learning, and grow in public.
+          I&apos;m learning to build things on the web. This is my space to document
+          projects, write about what I&apos;m learning, and grow in public.
         </p>
         <div className="fade-up fade-up-4" style={{ display: 'flex', gap: '12px' }}>
           <Link href="/projects" style={{

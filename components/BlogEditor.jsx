@@ -16,6 +16,7 @@ export default function BlogEditor() {
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
   const fileInputRef = useRef(null);
+  const contentRef = useRef(null);
 
   const generateSlug = (text) =>
     text.toLowerCase().trim()
@@ -97,9 +98,21 @@ export default function BlogEditor() {
       const data = await res.json();
 
       if (data.success) {
-        // Insert markdown image tag at cursor position
+        // Insert markdown image tag at the cursor position
         const imageMarkdown = `\n![${file.name}](${data.url})\n`;
-        setContent((prev) => prev + imageMarkdown);
+        const textarea = contentRef.current;
+        if (textarea) {
+          const start = textarea.selectionStart;
+          const end = textarea.selectionEnd;
+          setContent(content.slice(0, start) + imageMarkdown + content.slice(end));
+          const nextCursor = start + imageMarkdown.length;
+          requestAnimationFrame(() => {
+            textarea.focus();
+            textarea.setSelectionRange(nextCursor, nextCursor);
+          });
+        } else {
+          setContent((prev) => prev + imageMarkdown);
+        }
       } else {
         setUploadError(data.error || 'Upload failed.');
       }
@@ -158,7 +171,7 @@ export default function BlogEditor() {
           Post published!
         </h2>
         <p style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
-          Vercel is deploying your post now. It'll be live in ~30 seconds.
+          Vercel is deploying your post now. It&apos;ll be live in ~30 seconds.
         </p>
         <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
           <button
@@ -284,7 +297,7 @@ export default function BlogEditor() {
           color: 'var(--accent)',
         }}>
           <span>📅</span>
-          <span>Will be published with today's date: <strong>{getToday()}</strong></span>
+          <span>Will be published with today&apos;s date: <strong>{getToday()}</strong></span>
         </div>
         
         {title && (
@@ -354,6 +367,7 @@ export default function BlogEditor() {
         {/* Write tab */}
         {activeTab === 'write' && (
           <textarea
+            ref={contentRef}
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder={`Write your post in markdown...\n\n## Heading\n\nParagraph text here.`}

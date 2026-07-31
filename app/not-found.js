@@ -9,10 +9,10 @@ export default function NotFound() {
         <h1 style={{ fontSize: '48px', fontWeight: '700', marginBottom: '16px' }}>
           404
         </h1>
-        <p style={{ color: '#888', marginBottom: '24px' }}>
-          This page doesn't exist.
+        <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>
+          This page doesn&apos;t exist.
         </p>
-        <Link href="/" style={{ borderBottom: '1px solid #ccc', paddingBottom: '2px' }}>
+        <Link href="/" style={{ borderBottom: '1px solid var(--border)', paddingBottom: '2px' }}>
           Go home →
         </Link>
       </Section>

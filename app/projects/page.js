@@ -17,7 +17,7 @@ export default function ProjectsPage() {
           Projects
         </h1>
         <p style={{ color: 'var(--text-muted)', marginBottom: '40px' }}>
-          Things I've built while learning.
+          Things I&apos;ve built while learning.
         </p>
         <ProjectList projects={projects} />
       </Section>

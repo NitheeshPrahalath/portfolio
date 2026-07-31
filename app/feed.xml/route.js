@@ -1,14 +1,23 @@
 import { getAllPosts } from '../../lib/posts';
 
+const escapeXml = (str = '') =>
+  String(str).replace(/[<>&'"]/g, (c) => ({
+    '<': '&lt;',
+    '>': '&gt;',
+    '&': '&amp;',
+    "'": '&apos;',
+    '"': '&quot;',
+  }[c]));
+
 export async function GET() {
   const posts = getAllPosts();
   const siteUrl = 'https://portfolio-theta-gray-6qan0q1mpo.vercel.app/';
 
   const rssItems = posts.map((post) => `
     <item>
-      <title>${post.title}</title>
+      <title>${escapeXml(post.title)}</title>
       <link>${siteUrl}/blog/${post.slug}</link>
-      <description>${post.description}</description>
+      <description>${escapeXml(post.description)}</description>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
       <guid>${siteUrl}/blog/${post.slug}</guid>
     </item>

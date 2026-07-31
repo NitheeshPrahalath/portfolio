@@ -13,15 +13,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  const siteUrl = 'https://portfolio-theta-gray-6qan0q1mpo.vercel.app/';
 
   return {
     title: `${post.title} | Nitheesh Prahalath`,
     description: post.description,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
-      url: `${siteUrl}/blog/${post.slug}`,
+      url: `/blog/${post.slug}`,
       siteName: 'Nitheesh Prahalath | Portfolio',
       type: 'article',
       publishedTime: post.date,

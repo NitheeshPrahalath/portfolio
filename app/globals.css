@@ -142,14 +142,21 @@ img {
 }
 
 .post-content pre {
-  background-color: var(--accent-light);
-
+  background-color: #282c34;
+  color: #abb2bf;
   padding: 16px;
   border-radius: 8px;
   overflow-x: auto;
   margin-bottom: 16px;
-
   font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.post-content pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
   font-size: 14px;
 }
 
