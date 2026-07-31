@@ -251,7 +251,7 @@ export default function BlogEditor({ initialPost, availableTags = [] }) {
             </button>
           )}
           <button
-            onClick={() => router.push(`/blog/${savedSlug}`)}
+            onClick={() => router.push(isDraft ? `/admin/edit/${savedSlug}` : `/blog/${savedSlug}`)}
             style={{
               background: 'var(--bg-card)',
               color: 'var(--text-primary)',
@@ -263,7 +263,7 @@ export default function BlogEditor({ initialPost, availableTags = [] }) {
               cursor: 'pointer',
             }}
           >
-            View post →
+            {isDraft ? 'Edit draft →' : 'View post →'}
           </button>
           <button
             onClick={() => router.push('/admin')}

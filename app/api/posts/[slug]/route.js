@@ -1,7 +1,8 @@
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 import { sessionOptions } from '../../../../lib/session';
-import { sanitizeSlug } from '../../../../lib/slug';
+import { sanitizeReadSlug } from '../../../../lib/slug';
+import { resolveGitHubPostFileName } from '../../../../lib/posts';
 
 const apiUrl = (filePath) =>
   `https://api.github.com/repos/${process.env.GITHUB_OWNER}/${process.env.GITHUB_REPO}/contents/${filePath}`;
@@ -66,15 +67,21 @@ export async function DELETE(request, { params }) {
   }
 
   const { slug } = await params;
-  const safeSlug = sanitizeSlug(slug);
+  const safeSlug = sanitizeReadSlug(slug);
 
   if (!safeSlug) {
     return Response.json({ error: 'Invalid slug.' }, { status: 400 });
   }
 
-  const filePath = `content/blog/${safeSlug}.md`;
-
   try {
+    // Resolve the real filename — existing files may keep uppercase/underscores,
+    // so the GitHub API path must match the actual name.
+    const resolvedName = await resolveGitHubPostFileName(safeSlug);
+    if (!resolvedName) {
+      return Response.json({ error: 'Post not found.' }, { status: 404 });
+    }
+    const filePath = `content/blog/${resolvedName}.md`;
+
     // Fetch the post file — the SHA is required for deletion, the content
     // lets us find images that become orphans.
     const checkRes = await fetch(apiUrl(filePath), { headers });

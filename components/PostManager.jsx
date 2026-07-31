@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 
 export default function PostManager({ posts }) {
   const router = useRouter();
+  const [items, setItems] = useState(posts);
   const [pendingDelete, setPendingDelete] = useState(null);
   const [deleting, setDeleting] = useState(false);
   const [message, setMessage] = useState(null);
@@ -21,6 +22,7 @@ export default function PostManager({ posts }) {
           ? ` Removed ${data.deletedImages.length} image${data.deletedImages.length === 1 ? '' : 's'} no longer used by any post.`
           : '';
         setMessage({ type: 'success', text: `Deleted "${pendingDelete.title}".${imageNote}` });
+        setItems((prev) => prev.filter((p) => p.slug !== pendingDelete.slug));
         setPendingDelete(null);
         router.refresh();
       } else {
@@ -50,7 +52,7 @@ export default function PostManager({ posts }) {
         </div>
       )}
 
-      {posts.length === 0 ? (
+      {items.length === 0 ? (
         <div style={{
           background: 'var(--bg-card)',
           border: '1px solid var(--border)',
@@ -64,7 +66,7 @@ export default function PostManager({ posts }) {
         </div>
       ) : (
         <div>
-          {posts.map((post) => (
+          {items.map((post) => (
             <div
               key={post.slug}
               style={{

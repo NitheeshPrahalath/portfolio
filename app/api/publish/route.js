@@ -1,7 +1,8 @@
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 import { sessionOptions } from '../../../lib/session';
-import { sanitizeSlug } from '../../../lib/slug';
+import { sanitizeSlug, sanitizeReadSlug } from '../../../lib/slug';
+import { resolveGitHubPostFileName } from '../../../lib/posts';
 
 const apiUrl = (filePath) =>
   `https://api.github.com/repos/${process.env.GITHUB_OWNER}/${process.env.GITHUB_REPO}/contents/${filePath}`;
@@ -26,18 +27,31 @@ export async function POST(request) {
   }
 
   const { title, date, description, content, slug, tags, originalSlug, draft } = await request.json();
-  const safeSlug = sanitizeSlug(slug);
-  const safeOriginalSlug = originalSlug ? sanitizeSlug(originalSlug) : undefined;
+  const submittedSlug = String(slug || '').trim();
 
   if (!title || (!draft && !content)) {
     return Response.json({ error: draft ? 'Title is required.' : 'Title and content are required.' }, { status: 400 });
   }
-  if (!safeSlug) {
-    return Response.json({ error: 'Please enter a valid slug (letters, numbers, dashes).' }, { status: 400 });
+  if (!submittedSlug) {
+    return Response.json({ error: 'Please enter a valid slug.' }, { status: 400 });
   }
-  if (!/^[a-z0-9-]+$/.test(safeSlug)) {
+
+  // Resolve the actual existing file for this post (if any) — existing files may
+  // keep uppercase letters or underscores, so we must match the real filename.
+  const existingName = originalSlug
+    ? await resolveGitHubPostFileName(sanitizeReadSlug(originalSlug))
+    : null;
+
+  // If the editor submitted the same slug it loaded, keep writing to the exact
+  // same file instead of sanitizing it into a different name.
+  const unchanged = Boolean(existingName) && submittedSlug === originalSlug;
+
+  const targetSlug = unchanged ? existingName : sanitizeSlug(submittedSlug);
+  if (!unchanged && !/^[a-z0-9-]+$/.test(targetSlug)) {
     return Response.json({ error: 'Slug can only contain lowercase letters, numbers, and dashes.' }, { status: 400 });
   }
+  const targetFilePath = `content/blog/${targetSlug}.md`;
+  const isRename = Boolean(existingName) && !unchanged;
 
   const tagsLine = tags?.length ? `\ntags: [${tags.map(t => `"${t}"`).join(', ')}]` : '';
   const draftLine = draft ? '\ndraft: true' : '';
@@ -53,29 +67,26 @@ ${content}`;
 
   // Convert to base64 — GitHub API requires this
   const base64Content = Buffer.from(fileContent).toString('base64');
-  const filePath = `content/blog/${safeSlug}.md`;
-  const isUpdate = Boolean(safeOriginalSlug) && safeOriginalSlug === safeSlug;
-  const isRename = Boolean(safeOriginalSlug) && safeOriginalSlug !== safeSlug;
 
   try {
-    const targetSha = await getSha(filePath);
+    const targetSha = await getSha(targetFilePath);
 
     // New posts and renames must not silently overwrite an existing file.
-    if (!isUpdate && targetSha) {
-      return Response.json({ error: `A post with the slug "${safeSlug}" already exists.` }, { status: 409 });
+    if (!unchanged && targetSha) {
+      return Response.json({ error: `A post with the slug "${targetSlug}" already exists.` }, { status: 409 });
     }
 
     // Create/update the new file first, then remove the old one on rename —
     // a failed delete can never lose content this way.
-    const pushRes = await fetch(apiUrl(filePath), {
+    const pushRes = await fetch(apiUrl(targetFilePath), {
       method: 'PUT',
       headers: { ...headers, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         message: isRename
-          ? `blog: rename to "${safeSlug}"`
+          ? `blog: rename to "${targetSlug}"`
           : targetSha ? `blog: update "${title}"` : `blog: add "${title}"`,
         content: base64Content,
-        ...(isUpdate && targetSha && { sha: targetSha }),
+        ...(targetSha && { sha: targetSha }),
       }),
     });
 
@@ -86,14 +97,14 @@ ${content}`;
 
     // Rename: delete the old file now that the new one is safely in place.
     if (isRename) {
-      const oldPath = `content/blog/${safeOriginalSlug}.md`;
+      const oldPath = `content/blog/${existingName}.md`;
       const oldSha = await getSha(oldPath);
       if (oldSha) {
         const delRes = await fetch(apiUrl(oldPath), {
           method: 'DELETE',
           headers,
           body: JSON.stringify({
-            message: `blog: rename "${title}" (${safeOriginalSlug} → ${safeSlug})`,
+            message: `blog: rename "${title}" (${existingName} → ${targetSlug})`,
             sha: oldSha,
           }),
         });
@@ -104,7 +115,7 @@ ${content}`;
       }
     }
 
-    return Response.json({ success: true, slug: safeSlug });
+    return Response.json({ success: true, slug: targetSlug });
   } catch (err) {
     return Response.json({ error: err.message }, { status: 500 });
   }
