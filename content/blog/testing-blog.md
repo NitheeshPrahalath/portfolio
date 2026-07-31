@@ -1,11 +1,11 @@
 ---
-  title: "Testing blog"
-  date: "2026-07-31"
-  description: ""
+title: "Testing blog"
+date: "2026-07-31"
+description: ""
 tags: ["nothing"]
-  ---
+---
 
-  # Why Fantasy Worlds Feel Real: The Art of Building a World Readers Believe In
+# Why Fantasy Worlds Feel Real: The Art of Building a World Readers Believe In
 
 The best fantasy worlds are not simply filled with magic, mythical creatures, and ancient kingdoms. They feel alive because they have rules, history, conflict, and consequences. A reader may enter a world that has never existed, but the moment that world feels internally consistent, they begin to believe in it.
 

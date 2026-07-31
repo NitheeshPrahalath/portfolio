@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://portfolio-theta-gray-6qan0q1mpo.vercel.app/
+
+# Sitemaps
+Sitemap: https://portfolio-theta-gray-6qan0q1mpo.vercel.app/sitemap.xml

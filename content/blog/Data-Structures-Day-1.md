@@ -36,7 +36,7 @@ Data Structure
 
 ## Algorithm and Abstract data types:
 
-![1779727816116](image/Data-Structures-Day-1/1779727816116.png)
+![1779727816116](/images/1779727816116.png)
 
 To structure the data in memory, 'n' number of algorithms are proposed and all these algorithms are known as abstract data types.
 

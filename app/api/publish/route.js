@@ -14,12 +14,12 @@ export async function POST(request) {
 
   // Build the markdown file content
   const fileContent = `---
-  title: "${title}"
-  date: "${date}"
-  description: "${description}"${tagsLine}
-  ---
+title: "${title}"
+date: "${date}"
+description: "${description}"${tagsLine}
+---
 
-  ${content}`;
+${content}`;
 
   // Convert to base64 — GitHub API requires this
   const base64Content = Buffer.from(fileContent).toString('base64');
