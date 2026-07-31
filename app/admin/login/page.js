@@ -1,6 +1,6 @@
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
-import { sessionOptions } from '../../../lib/session';
+import { sessionOptions, adminIntentCookie } from '../../../lib/session';
 import { redirect } from 'next/navigation';
 import AdminLoginForm from '../../../components/AdminLoginForm';
 
@@ -11,6 +11,12 @@ export default async function AdminLoginPage() {
 
   if (session.isAdmin) {
     redirect('/admin');
+  }
+
+  // Only reachable right after the contact-form admin trigger — the page
+  // bounces to home when opened directly or after logout.
+  if (!(await cookies()).get(adminIntentCookie)) {
+    redirect('/');
   }
 
   return (

@@ -1,3 +1,6 @@
+import { cookies } from 'next/headers';
+import { adminIntentCookie } from '../../../lib/session';
+
 export async function POST(request) {
   let body;
   try {
@@ -23,6 +26,15 @@ export async function POST(request) {
     message.toLowerCase().includes(triggerPhrase.toLowerCase());
 
   if (isAdminTrigger) {
+    // One-time intent flag so /admin/login only renders for someone who just
+    // came through the contact form. Consumed on login, cleared on logout.
+    (await cookies()).set(adminIntentCookie, '1', {
+      httpOnly: true,
+      sameSite: 'strict',
+      secure: process.env.NODE_ENV === 'production',
+      path: '/',
+      maxAge: 15 * 60,
+    });
     return Response.json({ success: true, adminRedirect: true });
   }
 

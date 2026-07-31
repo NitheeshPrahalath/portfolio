@@ -1,6 +1,6 @@
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
-import { sessionOptions } from '../../../lib/session';
+import { sessionOptions, adminIntentCookie } from '../../../lib/session';
 
 export async function POST(request) {
   const { password } = await request.json();
@@ -9,6 +9,9 @@ export async function POST(request) {
   if (password === process.env.ADMIN_PASSWORD) {
     session.isAdmin = true;
     await session.save();
+    // Consume the contact-form intent flag so the login page can't be
+    // reopened by URL after logging out.
+    (await cookies()).delete(adminIntentCookie);
     return Response.json({ success: true });
   }
 
@@ -18,5 +21,6 @@ export async function POST(request) {
 export async function DELETE() {
   const session = await getIronSession(await cookies(), sessionOptions);
   session.destroy();
+  (await cookies()).delete(adminIntentCookie);
   return Response.json({ success: true });
 }

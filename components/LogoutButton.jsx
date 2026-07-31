@@ -10,7 +10,8 @@ export default function LogoutButton({ style }) {
   const handleLogout = async () => {
     setLoading(true);
     await fetch('/api/auth', { method: 'DELETE' });
-    router.push('/admin/login');
+    // The login page is gated behind the contact-form trigger, so return home.
+    router.push('/');
     router.refresh();
   };
 
