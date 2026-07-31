@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import Container from '../../../components/Container';
 import Section from '../../../components/Section';
 import ReadingProgress from '../../../components/ReadingProgress';
@@ -13,6 +14,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
+
+  if (!post) return { title: 'Post not found' };
 
   return {
     title: `${post.title} | Nitheesh Prahalath`,
@@ -40,6 +43,10 @@ export async function generateMetadata({ params }) {
 export default async function PostPage({ params }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
+
+  if (!post) {
+    notFound();
+  }
 
   return (
     <>

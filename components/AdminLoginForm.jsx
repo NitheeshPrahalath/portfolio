@@ -23,7 +23,8 @@ export default function AdminLoginForm() {
     const data = await res.json();
 
     if (data.success) {
-      router.push('/admin/write');
+      router.push('/admin');
+      router.refresh();
     } else {
       setError('Wrong password. Try again.');
       setLoading(false);

@@ -2,32 +2,81 @@
 
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { marked } from 'marked';
+import { generateSlug } from '../lib/slug';
+import TagMultiSelect from './TagMultiSelect';
+import LogoutButton from './LogoutButton';
 
-export default function BlogEditor() {
+export default function BlogEditor({ initialPost, availableTags = [] }) {
   const router = useRouter();
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [content, setContent] = useState('');
+  const isEdit = Boolean(initialPost);
+
+  const [title, setTitle] = useState(initialPost?.title || '');
+  const [description, setDescription] = useState(initialPost?.description || '');
+  const [content, setContent] = useState(initialPost?.content || '');
+  const [date, setDate] = useState(initialPost?.date || getToday());
+  const [tags, setTags] = useState(initialPost?.tags || []);
+  const [isDraft, setIsDraft] = useState(initialPost?.draft ?? false);
+  const [slug, setSlug] = useState(initialPost?.slug || '');
+  const [slugTouched, setSlugTouched] = useState(isEdit);
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
+  const [savedSlug, setSavedSlug] = useState(null);
   const [activeTab, setActiveTab] = useState('write');
-  const [tags, setTags] = useState('');
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
   const fileInputRef = useRef(null);
   const contentRef = useRef(null);
 
-  const generateSlug = (text) =>
-    text.toLowerCase().trim()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-');
+  function getToday() {
+    return new Date().toISOString().split('T')[0];
+  }
 
-  const getToday = () => new Date().toISOString().split('T')[0];
+  // Auto-generated slug until the admin edits it manually.
+  const slugValue = slugTouched ? slug : generateSlug(title);
+  const words = content.trim() ? content.trim().split(/\s+/).length : 0;
+  const readMinutes = Math.max(1, Math.ceil(words / 200));
+
+  const resetForm = () => {
+    setTitle('');
+    setDescription('');
+    setContent('');
+    setDate(getToday());
+    setTags([]);
+    setIsDraft(false);
+    setSlug('');
+    setSlugTouched(false);
+    setSavedSlug(null);
+    setStatus('idle');
+    setError('');
+  };
+
+  const handleSlugBlur = () => {
+    const clean = slugValue
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    if (clean !== slugValue) {
+      setSlug(clean);
+      setSlugTouched(true);
+    }
+  };
 
   const handlePublish = async () => {
-    if (!title || !content) {
-      setError('Title and content are required.');
+    if (!title) {
+      setError('Title is required.');
+      return;
+    }
+    if (!isDraft && !content) {
+      setError('Content is required to publish.');
+      return;
+    }
+    if (!slugValue) {
+      setError('Please enter a valid slug.');
       return;
     }
 
@@ -41,9 +90,11 @@ export default function BlogEditor() {
         title,
         description,
         content,
-        slug: generateSlug(title),
-        date: getToday(),
-        tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
+        slug: slugValue,
+        date,
+        tags,
+        draft: isDraft,
+        originalSlug: initialPost?.slug,
       }),
     });
 
@@ -51,6 +102,7 @@ export default function BlogEditor() {
 
     if (data.success) {
       setStatus('success');
+      setSavedSlug(data.slug);
     } else {
       setError(data.error || 'Something went wrong.');
       setStatus('idle');
@@ -125,11 +177,6 @@ export default function BlogEditor() {
     }
   };
 
-  const handleLogout = async () => {
-    await fetch('/api/auth', { method: 'DELETE' });
-    router.push('/admin');
-  };
-
   const inputStyle = {
     width: '100%',
     padding: '10px 14px',
@@ -155,6 +202,16 @@ export default function BlogEditor() {
     transition: 'all 0.2s',
   });
 
+  const logoutStyle = {
+    background: 'var(--bg-card)',
+    color: 'var(--text-muted)',
+    padding: '8px 16px',
+    borderRadius: '8px',
+    border: '1px solid var(--border)',
+    fontSize: '13px',
+    cursor: 'pointer',
+  };
+
   if (status === 'success') {
     return (
       <div style={{
@@ -168,34 +225,33 @@ export default function BlogEditor() {
       }}>
         <div style={{ fontSize: '48px' }}>🎉</div>
         <h2 style={{ fontSize: '24px', fontWeight: '700', color: 'var(--text-primary)' }}>
-          Post published!
+          {isDraft ? 'Draft saved!' : isEdit ? 'Post updated!' : 'Post published!'}
         </h2>
         <p style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
-          Vercel is deploying your post now. It&apos;ll be live in ~30 seconds.
+          {isDraft
+            ? 'Your draft is in the repo but hidden from the public blog until you publish it.'
+            : 'Vercel is deploying your post now. It&apos;ll be live in ~30 seconds.'}
         </p>
-        <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+        <div style={{ display: 'flex', gap: '12px', marginTop: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {!isEdit && (
+            <button
+              onClick={resetForm}
+              style={{
+                background: 'var(--accent)',
+                color: '#fff',
+                padding: '10px 24px',
+                borderRadius: '8px',
+                border: 'none',
+                fontSize: '14px',
+                fontWeight: '600',
+                cursor: 'pointer',
+              }}
+            >
+              Write another post
+            </button>
+          )}
           <button
-            onClick={() => {
-              setTitle('');
-              setDescription('');
-              setContent('');
-              setStatus('idle');
-            }}
-            style={{
-              background: 'var(--accent)',
-              color: '#fff',
-              padding: '10px 24px',
-              borderRadius: '8px',
-              border: 'none',
-              fontSize: '14px',
-              fontWeight: '600',
-              cursor: 'pointer',
-            }}
-          >
-            Write another post
-          </button>
-          <button
-            onClick={() => router.push('/blog')}
+            onClick={() => router.push(`/blog/${savedSlug}`)}
             style={{
               background: 'var(--bg-card)',
               color: 'var(--text-primary)',
@@ -207,7 +263,22 @@ export default function BlogEditor() {
               cursor: 'pointer',
             }}
           >
-            View blog →
+            View post →
+          </button>
+          <button
+            onClick={() => router.push('/admin')}
+            style={{
+              background: 'var(--bg-card)',
+              color: 'var(--text-primary)',
+              padding: '10px 24px',
+              borderRadius: '8px',
+              border: '1px solid var(--border)',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer',
+            }}
+          >
+            Manage posts
           </button>
         </div>
       </div>
@@ -223,29 +294,21 @@ export default function BlogEditor() {
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: '32px',
+        gap: '12px',
+        flexWrap: 'wrap',
       }}>
         <div>
+          <Link href="/admin" style={{ fontSize: '13px', color: 'var(--text-muted)', textDecoration: 'none', display: 'inline-block', marginBottom: '8px' }}>
+            ← Manage posts
+          </Link>
           <h1 style={{ fontSize: '24px', fontWeight: '700', color: 'var(--text-primary)' }}>
-            Write a Post
+            {isEdit ? 'Edit Post' : 'Write a Post'}
           </h1>
           <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
-            Admin only · publishes directly to GitHub
+            {isEdit ? `Editing ${initialPost.slug}.md` : 'Admin only · publishes directly to GitHub'}
           </p>
         </div>
-        <button
-          onClick={handleLogout}
-          style={{
-            background: 'var(--bg-card)',
-            color: 'var(--text-muted)',
-            padding: '8px 16px',
-            borderRadius: '8px',
-            border: '1px solid var(--border)',
-            fontSize: '13px',
-            cursor: 'pointer',
-          }}
-        >
-          Logout
-        </button>
+        <LogoutButton style={logoutStyle} />
       </div>
 
       {/* Metadata */}
@@ -276,35 +339,68 @@ export default function BlogEditor() {
           onChange={(e) => setDescription(e.target.value)}
         />
         <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '4px' }}>Tags</div>
-        <input
-          style={inputStyle}
-          type="text"
-          placeholder="React, Next.js, Beginner  (comma separated)"
-          value={tags}
-          onChange={(e) => setTags(e.target.value)}
-        />
+        <TagMultiSelect selected={tags} onChange={setTags} availableTags={availableTags} />
 
-        {/* Auto date display — add this */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          marginTop: '4px',
-          padding: '8px 14px',
-          background: 'var(--accent-light)',
-          borderRadius: '8px',
-          fontSize: '13px',
-          color: 'var(--accent)',
-        }}>
-          <span>📅</span>
-          <span>Will be published with today&apos;s date: <strong>{getToday()}</strong></span>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+          <div>
+            <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '4px' }}>Slug</div>
+            <input
+              style={inputStyle}
+              type="text"
+              placeholder="my-post-slug"
+              value={slugValue}
+              onChange={(e) => {
+                setSlug(e.target.value);
+                setSlugTouched(true);
+              }}
+              onBlur={handleSlugBlur}
+            />
+            <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '-6px' }}>
+              {!slugTouched
+                ? 'Auto-generated from the title — edit to customize.'
+                : `Lives at /blog/${slugValue || '…'}`}
+            </p>
+          </div>
+          <div>
+            <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '4px' }}>Publish date</div>
+            <input
+              style={{ ...inputStyle, colorScheme: 'light dark' }}
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+            <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '-6px' }}>
+              {isEdit ? 'Preserved from the original post.' : 'Defaults to today.'}
+            </p>
+          </div>
         </div>
-        
-        {title && (
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
-            Slug: <span style={{ color: 'var(--accent)' }}>{generateSlug(title)}</span>
-          </p>
-        )}
+
+        <label
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            padding: '12px 14px',
+            borderRadius: '8px',
+            border: '1px solid var(--border)',
+            background: 'var(--bg)',
+            cursor: 'pointer',
+            marginTop: '4px',
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={isDraft}
+            onChange={(e) => setIsDraft(e.target.checked)}
+            style={{ accentColor: 'var(--accent)', width: '16px', height: '16px', cursor: 'pointer', flexShrink: 0 }}
+          />
+          <span style={{ fontSize: '14px', color: 'var(--text-primary)', fontWeight: '500', whiteSpace: 'nowrap' }}>
+            Save as draft
+          </span>
+          <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
+            Drafts stay in your GitHub repo but are hidden from the public blog until you publish.
+          </span>
+        </label>
       </div>
 
       {/* Editor */}
@@ -322,6 +418,8 @@ export default function BlogEditor() {
         alignItems: 'center',
         padding: '12px 16px',
         borderBottom: '1px solid var(--border)',
+        gap: '12px',
+        flexWrap: 'wrap',
       }}>
         {/* Write / Preview tabs */}
         <div style={{ display: 'flex', gap: '8px' }}>
@@ -329,38 +427,47 @@ export default function BlogEditor() {
           <button style={tabStyle('preview')} onClick={() => setActiveTab('preview')}>Preview</button>
         </div>
 
-        {/* Image upload */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {uploadError && (
-            <span style={{ fontSize: '12px', color: '#e53e3e' }}>{uploadError}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          {/* Live stats */}
+          {words > 0 && (
+            <span style={{ fontSize: '12px', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+              {words.toLocaleString()} words · ~{readMinutes} min read
+            </span>
           )}
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            style={{ display: 'none' }}
-            id="image-upload"
-          />
-          <label
-            htmlFor="image-upload"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '6px 14px',
-              borderRadius: '8px',
-              border: '1px solid var(--border)',
-              background: uploading ? 'var(--accent-light)' : 'var(--bg)',
-              color: uploading ? 'var(--accent)' : 'var(--text-muted)',
-              fontSize: '13px',
-              fontWeight: '500',
-              cursor: uploading ? 'not-allowed' : 'pointer',
-              transition: 'all 0.2s',
-            }}
-          >
-            {uploading ? '⏳ Uploading...' : '🖼️ Add Image'}
-          </label>
+
+          {/* Image upload */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {uploadError && (
+              <span style={{ fontSize: '12px', color: '#e53e3e' }}>{uploadError}</span>
+            )}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              style={{ display: 'none' }}
+              id="image-upload"
+            />
+            <label
+              htmlFor="image-upload"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px 14px',
+                borderRadius: '8px',
+                border: '1px solid var(--border)',
+                background: uploading ? 'var(--accent-light)' : 'var(--bg)',
+                color: uploading ? 'var(--accent)' : 'var(--text-muted)',
+                fontSize: '13px',
+                fontWeight: '500',
+                cursor: uploading ? 'not-allowed' : 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >
+              {uploading ? '⏳ Uploading...' : '🖼️ Add Image'}
+            </label>
+          </div>
         </div>
       </div>
 
@@ -428,7 +535,9 @@ export default function BlogEditor() {
           width: '100%',
         }}
       >
-        {status === 'loading' ? 'Publishing to GitHub...' : '🚀 Publish Post'}
+        {status === 'loading'
+          ? (isDraft ? 'Saving draft...' : (isEdit ? 'Updating post...' : 'Publishing to GitHub...'))
+          : (isDraft ? '💾 Save Draft' : (isEdit ? '💾 Update Post' : '🚀 Publish Post'))}
       </button>
 
     </div>

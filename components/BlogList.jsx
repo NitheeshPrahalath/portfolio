@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import BlogCard from './BlogCard';
+import TagFilterDropdown from './TagFilterDropdown';
 
 export default function BlogList({ posts }) {
   const [search, setSearch] = useState('');
@@ -71,27 +72,9 @@ export default function BlogList({ posts }) {
         </button>
       </div>
 
-      {/* Tag Filter Pills */}
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '28px' }}>
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => setActiveTag(tag)}
-            style={{
-              padding: '5px 14px',
-              borderRadius: '999px',
-              border: '1px solid var(--border)',
-              background: activeTag === tag ? 'var(--accent)' : 'var(--bg-card)',
-              color: activeTag === tag ? '#fff' : 'var(--text-muted)',
-              fontSize: '12px',
-              fontWeight: activeTag === tag ? '600' : '400',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-            }}
-          >
-            {tag}
-          </button>
-        ))}
+      {/* Tag Filter Dropdown — stays compact no matter how many tags */}
+      <div style={{ marginBottom: '28px' }}>
+        <TagFilterDropdown tags={allTags} activeTag={activeTag} onSelect={setActiveTag} />
       </div>
 
       {/* Posts */}

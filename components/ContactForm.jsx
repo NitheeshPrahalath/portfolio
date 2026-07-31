@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function ContactForm() {
   const [status, setStatus] = useState('idle');
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const router = useRouter();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,11 +17,20 @@ export default function ContactForm() {
     setStatus('loading');
 
     try {
-      const res = await fetch(process.env.NEXT_PUBLIC_FORMSPREE_URL, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
+
+      const data = await res.json();
+
+      // Hidden admin entry point — only redirects to the login page,
+      // which still requires the admin password.
+      if (data?.adminRedirect) {
+        router.push('/admin/login');
+        return;
+      }
 
       if (res.ok) {
         setStatus('success');
