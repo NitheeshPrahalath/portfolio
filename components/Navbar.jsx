@@ -65,7 +65,31 @@ export default function Navbar() {
             <Link href="/about" style={linkStyle('/about')}>About</Link>
             <Link href="/projects" style={linkStyle('/projects')}>Projects</Link>
             <Link href="/blog" style={linkStyle('/blog')}>Blog</Link>
-
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('toggle-palette'))}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border)',
+                borderRadius: '8px',
+                padding: '5px 10px',
+                cursor: 'pointer',
+                fontSize: '12px',
+                color: 'var(--text-muted)',
+              }}
+              aria-label="Open command palette"
+            >
+              <span>Search</span>
+              <kbd style={{
+                fontSize: '11px',
+                background: 'var(--accent-light)',
+                color: 'var(--accent)',
+                padding: '1px 6px',
+                borderRadius: '4px',
+              }}>⌘K</kbd>
+            </button>
             {mounted && (
               <button
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}

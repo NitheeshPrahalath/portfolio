@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { marked } from 'marked';
 
@@ -13,6 +13,9 @@ export default function BlogEditor() {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('write');
   const [tags, setTags] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+  const fileInputRef = useRef(null);
 
   const generateSlug = (text) =>
     text.toLowerCase().trim()
@@ -50,6 +53,62 @@ export default function BlogEditor() {
     } else {
       setError(data.error || 'Something went wrong.');
       setStatus('idle');
+    }
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Only allow images
+    if (!file.type.startsWith('image/')) {
+      setUploadError('Only image files are allowed.');
+      return;
+    }
+
+    // Max 5MB
+    if (file.size > 5 * 1024 * 1024) {
+      setUploadError('Image must be under 5MB.');
+      return;
+    }
+
+    setUploading(true);
+    setUploadError('');
+
+    try {
+      // Convert to base64
+      const base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          base64,
+          filename: file.name,
+          mimeType: file.type,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        // Insert markdown image tag at cursor position
+        const imageMarkdown = `\n![${file.name}](${data.url})\n`;
+        setContent((prev) => prev + imageMarkdown);
+      } else {
+        setUploadError(data.error || 'Upload failed.');
+      }
+    } catch {
+      setUploadError('Something went wrong during upload.');
+    } finally {
+      setUploading(false);
+      // Reset file input so same file can be uploaded again
+      if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
 
@@ -243,16 +302,54 @@ export default function BlogEditor() {
         overflow: 'hidden',
         marginBottom: '16px',
       }}>
-        {/* Tabs */}
-        <div style={{
-          display: 'flex',
-          gap: '8px',
-          padding: '12px 16px',
-          borderBottom: '1px solid var(--border)',
-        }}>
+      {/* Toolbar */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '12px 16px',
+        borderBottom: '1px solid var(--border)',
+      }}>
+        {/* Write / Preview tabs */}
+        <div style={{ display: 'flex', gap: '8px' }}>
           <button style={tabStyle('write')} onClick={() => setActiveTab('write')}>Write</button>
           <button style={tabStyle('preview')} onClick={() => setActiveTab('preview')}>Preview</button>
         </div>
+
+        {/* Image upload */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {uploadError && (
+            <span style={{ fontSize: '12px', color: '#e53e3e' }}>{uploadError}</span>
+          )}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            style={{ display: 'none' }}
+            id="image-upload"
+          />
+          <label
+            htmlFor="image-upload"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: '6px 14px',
+              borderRadius: '8px',
+              border: '1px solid var(--border)',
+              background: uploading ? 'var(--accent-light)' : 'var(--bg)',
+              color: uploading ? 'var(--accent)' : 'var(--text-muted)',
+              fontSize: '13px',
+              fontWeight: '500',
+              cursor: uploading ? 'not-allowed' : 'pointer',
+              transition: 'all 0.2s',
+            }}
+          >
+            {uploading ? '⏳ Uploading...' : '🖼️ Add Image'}
+          </label>
+        </div>
+      </div>
 
         {/* Write tab */}
         {activeTab === 'write' && (
