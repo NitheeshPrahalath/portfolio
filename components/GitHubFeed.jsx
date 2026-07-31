@@ -7,7 +7,7 @@ export default async function GitHubFeed({ username }) {
       { next: { revalidate: 3600 } } // cache for 1 hour
     );
     const data = await res.json();
-    events = data.slice(0, 5); // only show last 5 events
+    events = data.slice(0, 10); // only show last 10 events
   } catch {
     return null;
   }
