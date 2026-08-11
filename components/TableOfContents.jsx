@@ -49,7 +49,7 @@ export default function TableOfContents({ headings }) {
         fontSize: '13px',
         color: activeId === heading.id ? 'var(--accent)' : 'var(--text-muted)',
         fontWeight: activeId === heading.id ? '600' : '400',
-        paddingLeft: heading.level === 3 ? '12px' : '0',
+        paddingLeft: heading.level === 1 ? '0' : heading.level === 2 ? '12px' : '24px',
         marginBottom: '10px',
         transition: 'color 0.2s',
         textDecoration: 'none',
