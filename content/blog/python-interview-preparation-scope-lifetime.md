@@ -5,6 +5,7 @@ description: ""
 tags: ["Python"]
 ---
 
+
 # Python Interview Preparation — Scope & Lifetime
 
 Scope and lifetime are two of the most frequently confused topics in Python interviews.
@@ -2489,3 +2490,660 @@ print(f())
 4. **Whether `global` or `nonlocal` would change the result, if relevant**
 
 Send me your answers, and I'll grade them like a Python interviewer—then give you a harder round involving **closures, comprehensions, class scope, `exec`, and tricky name resolution**.
+
+Absolutely. Here is a **clear review version** containing the answers to **all 8 Final Test questions**, with explanations you can come back to later.
+
+## Python Scope & Closure — Final Test Answers
+
+### Quick rule to remember: LEGB
+
+When Python looks for a name, it generally searches:
+
+```text id="hty5ab"
+L → Local
+E → Enclosing
+G → Global
+B → Built-in
+```
+
+Also remember:
+
+* **Assignment inside a function** usually makes a name **local**.
+* Use `global` to rebind a **module-level** variable.
+* Use `nonlocal` to rebind a variable in an **enclosing function**. 
+
+---
+
+# Test 1
+
+```python id="bmmrvz"
+x = 5
+
+def f():
+    print(x)
+
+x = 10
+f()
+```
+
+### Answer
+
+```text id="n8f4rr"
+10
+```
+
+### Which scope is searched?
+
+```text id="bpnxe4"
+Local → Enclosing → Global
+```
+
+### Explanation
+
+Inside `f()`, there is no local variable named `x`.
+
+So Python searches outward:
+
+* Local → no `x`
+* Enclosing → no `x`
+* Global → finds `x`
+
+Before `f()` is called, this code runs:
+
+```python id="vow08d"
+x = 10
+```
+
+Therefore, when `f()` executes, the global `x` is `10`.
+
+### Important point
+
+The function does **not** remember the value `5` from when it was defined. It looks up the global `x` when it is executed. 
+
+---
+
+# Test 2
+
+```python id="gchag9"
+x = 5
+
+def f():
+    print(x)
+    x = 10
+
+f()
+```
+
+### Answer
+
+```text id="r8jfnn"
+UnboundLocalError
+```
+
+### Why?
+
+Python sees this assignment:
+
+```python id="j7v0s7"
+x = 10
+```
+
+Because `x` is assigned inside `f()`, Python treats `x` as a **local variable throughout the entire function**.
+
+So Python effectively sees:
+
+```text id="n3iv7a"
+f():
+
+    x is local
+
+    print(x)  ← tries to read local x
+
+    x = 10    ← assignment happens later
+```
+
+At `print(x)`, the local `x` does not yet have a value.
+
+Therefore:
+
+```text id="z24x9e"
+UnboundLocalError
+```
+
+### Would `global x` change the result?
+
+Yes:
+
+```python id="m4bpg0"
+def f():
+    global x
+    print(x)
+    x = 10
+```
+
+Then Python uses the global `x`.
+
+---
+
+# Test 3 — Closure
+
+```python id="zgv99a"
+def outer():
+    x = 10
+
+    def inner():
+        nonlocal x
+        x += 1
+        return x
+
+    return inner
+
+f = outer()
+
+print(f())
+print(f())
+```
+
+### Answer
+
+```text id="xrtwm2"
+11
+12
+```
+
+### Step-by-step
+
+First:
+
+```python id="9g62jd"
+f = outer()
+```
+
+`outer()` creates:
+
+```text id="x0xme1"
+x = 10
+```
+
+It then returns `inner`.
+
+The important thing is: **`inner` still remembers and has access to `x`.**
+
+### First call
+
+```python id="efcn8h"
+f()
+```
+
+`x` is:
+
+```text id="qf9uiz"
+10
+```
+
+Then:
+
+```text id="7amgko"
+x += 1
+```
+
+So:
+
+```text id="sljfb8"
+10 → 11
+```
+
+It returns:
+
+```text id="um7ztl"
+11
+```
+
+### Second call
+
+The same `x` is still remembered.
+
+Its value is now:
+
+```text id="t2p1o0"
+11
+```
+
+Then:
+
+```text id="gk2jvt"
+11 → 12
+```
+
+It returns:
+
+```text id="wtbceh"
+12
+```
+
+## Small gist about Closure
+
+> **A closure is a function that remembers variables from its enclosing function, even after the outer function has finished.**
+
+In this example:
+
+```text id="pmol7t"
+outer() finishes
+      ↓
+inner() is returned
+      ↓
+inner still remembers x
+      ↓
+x keeps its value between calls
+```
+
+That is why the output is:
+
+```text id="wyqwqm"
+11
+12
+```
+
+The closure retains access to the enclosing state. 
+
+---
+
+# Test 4
+
+```python id="ks3qcl"
+x = 100
+
+def outer():
+    x = 200
+
+    def inner():
+        global x
+        x = 300
+
+    inner()
+    print(x)
+
+outer()
+print(x)
+```
+
+### Answer
+
+```text id="nwpzjp"
+200
+300
+```
+
+### Step-by-step
+
+Initially:
+
+```text id="z4q19d"
+Global x = 100
+```
+
+Inside `outer()`:
+
+```text id="qvtsgi"
+Local x = 200
+```
+
+Inside `inner()`:
+
+```python id="kljsa2"
+global x
+```
+
+This tells Python:
+
+> Use the module-level/global `x`, not `outer()`'s `x`.
+
+Therefore:
+
+```python id="b8zz6j"
+x = 300
+```
+
+changes:
+
+```text id="3vdp0q"
+Global x: 100 → 300
+```
+
+It does **not** change `outer()`'s local `x`.
+
+So inside `outer()`:
+
+```text id="v5yxoo"
+200
+```
+
+After `outer()` finishes:
+
+```text id="4twamr"
+Global x = 300
+```
+
+So:
+
+```text id="b9j1u9"
+200
+300
+```
+
+---
+
+# Test 5
+
+```python id="rs26tn"
+funcs = []
+
+for i in range(3):
+    funcs.append(lambda: i)
+
+print([f() for f in funcs])
+```
+
+### Answer
+
+```python id="tqhh7g"
+[2, 2, 2]
+```
+
+### Why?
+
+The loop finishes with:
+
+```text id="bav4rr"
+i = 2
+```
+
+The lambda functions do not save separate copies of the values `0`, `1`, and `2`.
+
+Instead, they all refer to the same variable:
+
+```text id="4xd85w"
+i
+```
+
+When the functions are finally called, Python looks up `i`.
+
+At that point:
+
+```text id="yz5d5x"
+i = 2
+```
+
+Therefore:
+
+```text id="u9dfx8"
+f1() → 2
+f2() → 2
+f3() → 2
+```
+
+Result:
+
+```python id="teyrpp"
+[2, 2, 2]
+```
+
+This is called **late binding**. 
+
+---
+
+# Test 6 — Hard
+
+```python id="gmv5tr"
+x = "global"
+
+def outer():
+    x = "outer"
+
+    def inner():
+        print(x)
+
+    x = "changed"
+    return inner
+
+f = outer()
+f()
+```
+
+### Answer
+
+```text id="0f5f0s"
+changed
+```
+
+### Why?
+
+Inside `outer()`:
+
+```python id="ihd6z9"
+x = "outer"
+```
+
+Then `inner()` is created. `inner()` refers to the enclosing variable `x`.
+
+Before `outer()` returns, this happens:
+
+```python id="jigbo1"
+x = "changed"
+```
+
+So the enclosing `x` is changed.
+
+Then:
+
+```python id="c6fzwl"
+return inner
+```
+
+The returned function remembers the enclosing `x`.
+
+When:
+
+```python id="aicx0f"
+f()
+```
+
+runs, the remembered `x` is:
+
+```text id="ip3i6g"
+changed
+```
+
+Therefore:
+
+```text id="hpdwde"
+changed
+```
+
+---
+
+# Test 7 — Very Hard
+
+```python id="gy3pb7"
+x = 10
+
+def outer():
+    x = 20
+
+    def inner():
+        print(x)
+        x = 30
+
+    inner()
+
+outer()
+```
+
+### Answer
+
+```text id="2n3tnb"
+UnboundLocalError
+```
+
+### Why?
+
+Inside `inner()`, Python sees:
+
+```python id="twgbzs"
+x = 30
+```
+
+Therefore, Python decides that `x` is a **local variable inside `inner()`**.
+
+So conceptually:
+
+```text id="o3l5f7"
+inner():
+
+    x is LOCAL
+
+    print(x)  ← read local x
+
+    x = 30    ← assign local x
+```
+
+The problem is that `print(x)` happens before the local `x` has been assigned.
+
+Therefore:
+
+```text id="cp4rvb"
+UnboundLocalError
+```
+
+### Why doesn't Python use `outer()`'s `x = 20`?
+
+Because the assignment:
+
+```python id="hxyqhy"
+x = 30
+```
+
+already tells Python that `x` belongs to the local scope of `inner()`.
+
+If you wanted to modify `outer()`'s `x`, you would use:
+
+```python id="b3p0ib"
+nonlocal x
+```
+
+Then Python would use the enclosing `x`. 
+
+---
+
+# Test 8 — Lifetime and Closure
+
+```python id="r2zsgj"
+def create():
+    data = [1, 2, 3]
+
+    def get_data():
+        return data
+
+    return get_data
+
+f = create()
+
+print(f())
+```
+
+### Answer
+
+```python id="if2srm"
+[1, 2, 3]
+```
+
+### Why?
+
+`create()` creates:
+
+```text id="6hjklt"
+data = [1, 2, 3]
+```
+
+Then it creates `get_data()`, which uses `data`.
+
+```python id="1hwlb7"
+def get_data():
+    return data
+```
+
+`create()` returns `get_data`.
+
+Normally, after a function returns, you might expect its local variables to disappear.
+
+But `get_data()` still needs `data`.
+
+Therefore, Python keeps the enclosing state available through the **closure**.
+
+So:
+
+```text id="g0zby9"
+f
+↓
+get_data()
+↓
+remembers data
+↓
+[1, 2, 3]
+```
+
+When you call:
+
+```python id="0me5ve"
+f()
+```
+
+it returns:
+
+```python id="wzztaj"
+[1, 2, 3]
+```
+
+The returned function retains access to its enclosing variable. 
+
+---
+
+# Quick Review Table
+
+| Test | Answer              | Main Concept                                 |
+| ---- | ------------------- | -------------------------------------------- |
+| 1    | `10`                | Global name looked up when function executes |
+| 2    | `UnboundLocalError` | Assignment makes `x` local                   |
+| 3    | `11`, `12`          | **Closure + `nonlocal` preserves state**     |
+| 4    | `200`, `300`        | `global` modifies module-level `x`           |
+| 5    | `[2, 2, 2]`         | Late binding                                 |
+| 6    | `changed`           | Closure sees changed enclosing binding       |
+| 7    | `UnboundLocalError` | Local assignment prevents enclosing lookup   |
+| 8    | `[1, 2, 3]`         | Closure keeps access to enclosing data       |
+
+## The most important idea to remember
+
+When you see a Python scope question, ask:
+
+```text id="eec1r4"
+1. Is the name assigned inside this function?
+
+   Yes → Usually LOCAL
+
+2. Is there a global declaration?
+
+   Yes → Use GLOBAL scope
+
+3. Is there a nonlocal declaration?
+
+   Yes → Use ENCLOSING function scope
+
+4. Otherwise:
+
+   Search using LEGB
+```
+
+And for **closures**, remember this simple sentence:
+
+> **A closure is a nested function that remembers variables from its enclosing scope, even after the outer function returns.**
+
