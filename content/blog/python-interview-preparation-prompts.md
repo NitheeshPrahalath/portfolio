@@ -5,195 +5,1518 @@ description: ""
 tags: ["Python"]
 ---
 
-🐍 Python Interview Prep — Beginner Prompt Sequence
-Part 1 — Programming Fundamentals
+# 🐍 Python Interview Preparation — Beginner → Intermediate Roadmap
 
-You've already completed:
+I want to prepare for a **beginner-to-intermediate Python developer interview**.
 
-Prompt 1 — Variables, Data Types & Operators
+Teach me systematically. Do not simply give me explanations to read. For every topic, follow this learning cycle:
 
-Teach me Python variables, constants, data types, mutability/immutability, assignment, == vs is, operators, expressions, and operator precedence for an intermediate-level job interview. Explain deeply with examples, interview traps, output-based questions, and coding exercises. Test me before moving on.
+**Learn → Examples → Explain it myself → Output questions → Coding exercises → Interview questions → Mini-test → Fix weaknesses → Next topic**
 
-Next:
+### Teaching rules
 
-Prompt 2 — Conditionals
+For every topic:
 
-Continue my Python interview preparation. Teach me if, elif, else, nested conditions, conditional expressions, truthiness/falsiness, comparison operators, logical operators, and short-circuit evaluation. Explain the concepts deeply, show practical examples, common interview traps, output-prediction questions, and coding exercises. Test my understanding before moving on.
+1. Explain the concept from first principles.
+2. Build a simple mental model before introducing advanced details.
+3. Show practical Python examples.
+4. Explain what Python is doing internally when relevant.
+5. Point out common interview traps and misconceptions.
+6. Give output-prediction questions.
+7. Give progressively harder coding exercises.
+8. Ask me to explain concepts in my own words.
+9. Act like an interviewer when testing me.
+10. **Do not reveal answers before I attempt a question.**
+11. If I make a mistake, identify the exact misconception and teach that part again.
+12. Track my weak areas throughout the curriculum.
+13. Do not move to the next topic until I demonstrate reasonable understanding.
+14. Occasionally mix previous topics into new exercises so I retain them.
+15. For coding problems, prioritize reasoning and problem-solving over memorizing solutions.
+16. Ask follow-up interview questions when my answer is incomplete or interesting.
+17. Include time and space complexity whenever relevant.
+18. Gradually increase difficulty from beginner → intermediate interview level.
 
-Prompt 3 — Loops
+My goal is that the following topics become **second nature**, not merely familiar.
 
-Continue with Python interview preparation. Teach me for loops, while loops, range(), break, continue, pass, nested loops, enumerate(), zip(), and common iteration patterns. Explain when to use each, common mistakes, time complexity of nested loops, interview questions, output-prediction problems, and coding exercises. Test me before moving on.
+---
 
-Prompt 4 — Functions
+# Part 1 — Python Language Fundamentals
 
-Continue with Python interview preparation. Teach me functions from beginner to intermediate interview level: defining functions, parameters, arguments, return values, positional and keyword arguments, default arguments, *args, **kwargs, scope, recursion, lambda functions, and first-class functions. Include common interview traps, coding problems, output-based questions, and progressively harder exercises. Test me before moving on.
+## Prompt 1 — Variables, Data Types & Operators
 
-Prompt 5 — Scope & Lifetime
+Teach me Python variables, constants, naming conventions, built-in data types, dynamic typing, mutable vs immutable objects, assignment, multiple assignment, unpacking, `==` vs `is`, identity, membership, arithmetic/comparison/logical/bitwise operators, expressions, and operator precedence.
 
-Continue my Python interview preparation. Teach me variable scope and lifetime in depth, including local, enclosing, global, and built-in scopes, the LEGB rule, global, nonlocal, name resolution, variable lifetime, and common scope-related interview traps. Give me tricky output questions and coding exercises, then test me.
+Also introduce:
 
-Prompt 6 — Error & Exception Handling
+* Objects and references
+* Object identity
+* Mutability
+* Hashability
+* `None`
+* Truthiness
 
-Continue my Python interview preparation. Teach me errors versus exceptions, try, except, else, finally, raising exceptions, custom exceptions, exception hierarchy, multiple exceptions, exception handling best practices, and common anti-patterns. Include realistic examples, interview questions, output-based problems, and coding exercises. Test me before moving on.
+Include:
 
-Prompt 7 — Input & Output
+* Deep explanations
+* Practical examples
+* Interview traps
+* Output-prediction questions
+* Coding exercises
+* Interview questions
 
-Continue my Python interview preparation. Teach me Python input/output thoroughly: input(), print(), formatting, f-strings, string formatting, reading and writing files, file modes, with, context managers at a basic level, and common I/O errors. Include practical examples, interview questions, coding exercises, and common mistakes. Test me before moving on.
+Test me before moving on.
 
-Prompt 8 — Modules & Packages
+---
 
-Continue my Python interview preparation. Teach me modules, packages, imports, import, from ... import, aliases, __name__, __main__, Python package structure, standard library usage, and the basics of virtual environments and dependency management. Explain what happens during imports at an interview-appropriate level. Include interview questions, practical examples, traps, and exercises. Test me before moving on.
+## Prompt 2 — Conditionals
 
-Prompt 9 — Debugging
+Teach me:
 
-Continue my Python interview preparation. Teach me debugging fundamentals: reading tracebacks, identifying syntax/runtime/logical errors, using print debugging, assertions, the Python debugger, breakpoints, inspecting variables, and systematic debugging techniques. Give me deliberately broken Python programs and make me diagnose and fix them like an interview candidate. Test me before moving on.
+* `if`
+* `elif`
+* `else`
+* Nested conditions
+* Conditional expressions
+* Truthiness/falsiness
+* Comparison operators
+* Logical operators
+* Short-circuit evaluation
+* Chained comparisons
+* `match` / `case` as Python's pattern-matching alternative to traditional switch statements
 
-Part 2 — Object-Oriented Programming
+Explain when each approach should be used.
 
-Once Programming Fundamentals are finished, use these.
+Include practical examples, common interview traps, output questions, coding exercises, and interview questions.
 
-Prompt 10 — Classes & Objects
+Test me before moving on.
 
-Start the Python OOP section of my interview preparation. Teach me classes, objects, attributes, methods, constructors, __init__, instance variables, class variables, instance methods, class methods, static methods, and object creation. Explain the underlying concepts clearly and compare them with procedural programming. Include interview questions, tricky examples, output questions, and coding exercises. Test me before moving on.
+---
 
-Prompt 11 — Encapsulation
+## Prompt 3 — Loops & Iteration
 
-Continue Python OOP interview preparation. Teach me encapsulation, public/protected/private conventions in Python, name mangling, properties, getters/setters, @property, and why encapsulation matters. Explain Python's approach compared with languages that enforce access modifiers. Include interview traps and coding exercises. Test me before moving on.
+Teach me:
 
-Prompt 12 — Inheritance
+* `for`
+* `while`
+* `range()`
+* `break`
+* `continue`
+* `pass`
+* Nested loops
+* `enumerate()`
+* `zip()`
+* Iteration over dictionaries, sets, strings, and lists
+* Common iteration patterns
+* Loop `else`
+* Avoiding accidental infinite loops
 
-Continue Python OOP interview preparation. Teach me inheritance, single inheritance, multilevel inheritance, multiple inheritance, method overriding, super(), method resolution order (MRO), and the diamond problem. Explain Python's implementation and common interview questions. Include output-prediction problems and coding exercises. Test me before moving on.
+Explain the time complexity of nested loops and how to reason about loop complexity.
+
+Include interview questions, output-prediction problems, and coding exercises.
+
+Test me before moving on.
+
+---
+
+## Prompt 4 — Functions
+
+Teach me functions from beginner through intermediate interview level:
+
+* Defining functions
+* Parameters vs arguments
+* Positional arguments
+* Keyword arguments
+* Default arguments
+* `*args`
+* `**kwargs`
+* Positional-only parameters
+* Keyword-only parameters
+* Return values
+* Multiple return values
+* Docstrings
+* Lambda functions
+* First-class functions
+* Higher-order functions
+* Closures
+* Function annotations
+
+Include common traps such as mutable default arguments.
+
+Give progressively harder coding problems and output questions.
+
+Test me before moving on.
+
+---
+
+## Prompt 5 — Scope & Lifetime
+
+Teach me variable scope and lifetime deeply:
+
+* Local scope
+* Enclosing scope
+* Global scope
+* Built-in scope
+* LEGB
+* `global`
+* `nonlocal`
+* Name resolution
+* Variable lifetime
+* Closures
+* Late binding
+* Common scope-related traps
 
-Prompt 13 — Polymorphism
+Give me tricky output questions and coding exercises.
 
-Continue Python OOP interview preparation. Teach me polymorphism in Python, method overriding, duck typing, operator overloading, protocols/interfaces conceptually, and compile-time versus runtime polymorphism. Give practical examples and explain what an interviewer expects from an intermediate Python developer. Include tricky questions and coding exercises. Test me before moving on.
+Test me before moving on.
 
-Prompt 14 — Abstraction & Interfaces
+---
+
+## Prompt 6 — Error & Exception Handling
+
+Teach me:
+
+* Syntax errors
+* Runtime errors
+* Logical errors
+* Exceptions
+* Exception hierarchy
+* `try`
+* `except`
+* `else`
+* `finally`
+* `raise`
+* Custom exceptions
+* Multiple exceptions
+* Exception chaining
+* `ValueError`, `TypeError`, `KeyError`, `IndexError`, etc.
+* EAFP vs LBYL
+* Exception-handling best practices
+* Anti-patterns such as bare `except`
 
-Continue Python OOP interview preparation. Teach me abstraction, abstract classes, the abc module, ABC, @abstractmethod, interfaces in Python, protocols, and duck typing. Explain when each approach should be used and compare Python with Java-style interfaces. Include interview questions, design examples, traps, and exercises. Test me before moving on.
+Include realistic examples, output questions, interview questions, and coding exercises.
 
-Prompt 15 — Composition vs Inheritance
+Test me before moving on.
 
-Continue Python OOP interview preparation. Teach me composition versus inheritance in depth. Explain "is-a" versus "has-a", coupling, flexibility, maintainability, dependency relationships, and when composition is preferable. Give me realistic examples and ask me to redesign poor inheritance-based code using composition. Include interview questions and coding exercises. Test me before moving on.
+---
 
-Prompt 16 — SOLID Principles
+## Prompt 7 — Input & Output
 
-Continue Python OOP interview preparation. Teach me all five SOLID principles deeply: SRP, OCP, LSP, ISP, and DIP. Explain each with bad and improved Python examples, common misconceptions, practical software-design situations, and interview questions. Make me identify SOLID violations in code and fix them. Test me before moving on.
+Teach me:
+
+* `input()`
+* `print()`
+* `sep`
+* `end`
+* String formatting
+* f-strings
+* Format specifications
+* Reading files
+* Writing files
+* File modes
+* Text vs binary files
+* Encoding
+* `with`
+* Context managers
+* Common I/O errors
 
-Prompt 17 — Dependency Injection
+Explain context managers at a basic level here and revisit them deeply later.
 
-Continue Python OOP interview preparation. Teach me dependency injection in Python from fundamentals to interview level. Explain dependency inversion, constructor injection, setter injection, function-based injection, dependency composition, mocking, and why DI improves testing and maintainability. Give realistic examples and interview questions. Test me before moving on.
+Include practical examples and exercises.
 
-Part 3 — Basic Data Structures
+Test me before moving on.
 
-Prompt 18 — Arrays & Python Lists
+---
 
-Start the Python data structures section of my interview preparation. Teach me arrays conceptually and Python lists in depth, including indexing, slicing, insertion, deletion, traversal, searching, copying, mutability, list methods, list comprehensions, and time complexity of common operations. Explain the difference between Python lists and traditional arrays. Include interview questions and coding problems. Test me before moving on.
+## Prompt 8 — Modules, Packages & Imports
 
-Prompt 19 — Strings
+Teach me:
+
+* Modules
+* Packages
+* `import`
+* `from ... import`
+* Aliases
+* Absolute vs relative imports
+* `__name__`
+* `__main__`
+* `if __name__ == "__main__":`
+* Python package structure
+* Standard library usage
+* Circular imports
+* Import caching
+* What happens during an import at an interview-appropriate level
 
-Continue my Python data structures interview preparation. Teach me strings deeply, including immutability, indexing, slicing, concatenation, searching, frequency counting, common string methods, string formatting, character processing, and efficient string manipulation. Include common interview patterns and progressively harder coding problems. Test me before moving on.
+Also teach:
 
-Prompt 20 — Linked Lists
+* Virtual environments
+* `venv`
+* Package management
+* `pip`
+* Dependency management
+* `requirements.txt`
+* `pyproject.toml`
 
-Continue my Python interview preparation. Teach me linked lists from scratch: nodes, singly linked lists, doubly linked lists, insertion, deletion, traversal, searching, reversing a linked list, fast and slow pointers, and time/space complexity. Implement them in Python and explain every step. Include common interview problems and test me.
+Include practical project structures, interview traps, and exercises.
 
-Prompt 21 — Stacks
+Test me before moving on.
+
+---
 
-Continue my Python data structures interview preparation. Teach me stacks, LIFO, implementation using lists and deque, push/pop/peek operations, complexity, applications, balanced parentheses, expression evaluation, and monotonic-stack concepts at an appropriate beginner/intermediate level. Include interview questions and coding exercises. Test me before moving on.
+## Prompt 9 — Debugging
 
-Prompt 22 — Queues
+Teach me debugging fundamentals:
 
-Continue my Python data structures interview preparation. Teach me queues, FIFO, implementation using collections.deque, enqueue/dequeue operations, circular queues conceptually, complexity, and real-world applications. Include coding problems and interview questions. Test me before moving on.
+* Reading tracebacks
+* Syntax errors
+* Runtime errors
+* Logical errors
+* Print debugging
+* Assertions
+* `assert`
+* Python debugger
+* Breakpoints
+* Inspecting variables
+* Stack frames
+* Systematic debugging
+* Reproducing bugs
+* Isolating the cause
+* Fixing rather than masking problems
 
-Prompt 23 — Hash Maps / Dictionaries
+Give me deliberately broken Python programs.
 
-Continue my Python data structures interview preparation. Teach me hash tables and Python dictionaries deeply: hashing, hash functions, collisions, buckets, key/value lookup, average-case complexity, worst-case considerations, hashable objects, dictionary methods, and common interview patterns such as frequency counting and lookup tables. Include coding problems and tricky interview questions. Test me before moving on.
+Act like an interviewer and make me diagnose and fix them.
 
-Prompt 24 — Sets
+Test me before moving on.
 
-Continue my Python data structures interview preparation. Teach me sets and hashing in Python, including uniqueness, membership testing, set operations, implementation concepts, complexity, hashability, and practical interview patterns. Include coding exercises such as duplicate detection and intersection problems. Test me before moving on.
+---
 
-Part 4 — Basic Algorithms
+# Part 2 — Core Python Concepts
 
-Prompt 25 — Linear Search
+## Prompt 10 — Mutable vs Immutable Objects & Copying
 
-Start the Python algorithms section of my interview preparation. Teach me linear search, how it works, implementation, best/average/worst-case complexity, when it is appropriate, and common variations. Give me progressively harder coding problems and interview questions. Test me before moving on.
+Teach me deeply:
 
-Prompt 26 — Binary Search
+* Mutable objects
+* Immutable objects
+* Object references
+* Aliasing
+* Assignment vs copying
+* `copy.copy()`
+* `copy.deepcopy()`
+* Shallow copy
+* Deep copy
+* Nested mutable objects
+* Common mutation bugs
+* Hashability and immutability
 
-Continue my Python algorithms interview preparation. Teach me binary search deeply, including the core idea, sorted-array requirement, iterative and recursive implementations, boundary handling, common bugs, time complexity, and variations such as first/last occurrence and search on an answer space. Give me interview-level coding problems and test me thoroughly.
+Give tricky output questions such as nested-list and dictionary examples.
 
-Prompt 27 — Sorting
+Include practical coding exercises and interview questions.
 
-Continue my Python algorithms interview preparation. Teach me sorting from fundamentals: why sorting matters, bubble sort, selection sort, insertion sort, merge sort, quicksort, Python's sorted() and .sort(), stability, in-place sorting, and time/space complexity. Explain which algorithms I should actually know for interviews and why. Include coding exercises and interview questions. Test me before moving on.
+Test me before moving on.
 
-Prompt 28 — Recursion
+---
 
-Continue my Python algorithms interview preparation. Teach me recursion deeply: base cases, recursive cases, call stack, tracing recursive execution, recursion versus iteration, stack overflow, recursive tree problems, and memoization basics. Give me progressively harder recursion problems and make me trace execution manually. Test me before moving on.
+## Prompt 11 — Python Memory Model
 
-Prompt 29 — Two Pointers
+Teach me the Python memory model at an interview-appropriate level:
 
-Continue my Python algorithms interview preparation. Teach me the two-pointer technique from scratch. Explain when it applies, opposite-direction pointers, same-direction pointers, sorted arrays, removing duplicates, pair-sum problems, and linked-list applications. Give me progressively harder interview problems and explain the reasoning process, not just the solution. Test me before moving on.
+* Objects
+* References
+* Names
+* Identity
+* `id()`
+* Object allocation
+* Reference counting
+* Garbage collection
+* Reference cycles
+* Object lifetime
+* Small-integer/string interning concepts
+* Why implementation details such as CPython behavior should not be confused with Python language guarantees
 
-Prompt 30 — Sliding Window
+Explain reference counting and garbage collection clearly.
 
-Continue my Python algorithms interview preparation. Teach me the sliding-window technique deeply, including fixed-size and variable-size windows, maintaining window state, frequency maps, longest/shortest substring problems, and recognizing when sliding window applies. Give me progressively harder coding interview problems and test me.
+Give memory-related output questions and interview traps.
 
-Prompt 31 — Basic Traversal
+Test me before moving on.
 
-Continue my Python algorithms interview preparation. Teach me traversal techniques for arrays, strings, linked lists, trees, and graphs at a beginner/intermediate level. Explain DFS and BFS conceptually and practically where appropriate. Focus on recognizing traversal patterns and choosing the right data structure. Include coding exercises and interview questions. Test me before moving on.
+---
 
-Part 5 — Beginner Completion Test
+## Prompt 12 — Iterators & Generators
 
-After finishing all 31 topics, don't immediately jump to intermediate topics.
+Teach me:
 
-Use this:
+* Iterable vs iterator
+* `iter()`
+* `next()`
+* `StopIteration`
+* Iterator protocol
+* Generator functions
+* `yield`
+* Generator expressions
+* Lazy evaluation
+* Generator state
+* `yield from`
+* Memory advantages
+* When generators should and shouldn't be used
 
-Prompt 32 — Beginner Mastery Assessment
+Compare:
 
-I have completed the Python beginner interview-preparation curriculum covering programming fundamentals, OOP, basic data structures, and basic algorithms. Give me a comprehensive mastery assessment. Do not teach me initially. Test me across all topics using a mixture of conceptual questions, output-prediction questions, debugging problems, code-writing problems, complexity questions, and interview-style follow-ups. Start easy and progressively increase difficulty. Do not reveal answers until I attempt each question. Track my weak areas and, after the assessment, give me a detailed scorecard and a revision plan.
+* Lists
+* Iterators
+* Generators
 
-🏆 Then do a mock interview
+Give me output-tracing exercises where I must predict generator execution.
 
-Prompt 33 — Beginner Python Mock Interview
+Include coding problems and interview questions.
 
-Conduct a realistic Python developer mock interview at beginner-to-intermediate level. Act exactly like an interviewer. Ask one question at a time and wait for my answer. Cover Python fundamentals, OOP, data structures, algorithms, debugging, and basic coding problems. Ask follow-up questions when my answer is incomplete or interesting. Do not immediately tell me the answer. Evaluate my communication, correctness, depth, problem-solving approach, and code quality. At the end, give me an interview-style evaluation with strengths, weaknesses, and specific topics I need to revise.
+Test me before moving on.
 
-📌 One rule I recommend
+---
 
-Don't blindly send the next prompt immediately after finishing a topic.
+## Prompt 13 — Decorators
 
-For each topic, follow this cycle:
+Teach me decorators deeply:
 
-Learn
-  ↓
-Examples
-  ↓
-Explain it yourself
-  ↓
-Output questions
-  ↓
-Coding exercises
-  ↓
-Interview questions
-  ↓
-Mini-test
-  ↓
-Fix weaknesses
-  ↓
-Next topic
+* Functions as first-class objects
+* Higher-order functions
+* Closures
+* Function wrapping
+* `@decorator`
+* Decorators with arguments
+* `functools.wraps`
+* Multiple decorators
+* Class decorators conceptually
 
-And whenever you get stuck, use:
+Build decorators from scratch before using shortcuts.
 
-"I don't understand this concept. Explain it again using a simpler mental model, then give me 3 progressively harder examples and test me."
+Give practical examples such as:
 
-When you solve a coding problem, use:
+* Logging
+* Timing
+* Authorization
+* Caching
 
-"Don't give me the solution yet. Act as my interviewer and give me hints one at a time only when I need them."
+Include tricky output questions and coding exercises.
 
-And when you want revision:
+Test me before moving on.
 
-"Quiz me on everything we've covered so far. Don't give answers until I attempt each question."
+---
 
-This will make the preparation much more effective than simply reading explanations.
+## Prompt 14 — Functional Programming Tools
+
+Teach me:
+
+* Lambda functions
+* `map()`
+* `filter()`
+* `reduce()`
+* `functools.reduce`
+* List comprehensions
+* Generator expressions
+* Higher-order functions
+
+Explain when these approaches improve readability and when a normal loop or comprehension is better.
+
+Give progressively harder coding problems.
+
+Test me before moving on.
+
+---
+
+## Prompt 15 — Context Managers
+
+Teach me context managers deeply:
+
+* Why resource management matters
+* `with`
+* `__enter__`
+* `__exit__`
+* Context manager protocol
+* Writing custom context managers
+* `contextlib`
+* `contextlib.contextmanager`
+* Exception handling inside context managers
+* Practical examples involving files/resources
+
+Explain how context managers relate to RAII/resource management conceptually.
+
+Include interview traps, output questions, and coding exercises.
+
+Test me before moving on.
+
+---
+
+# Part 3 — Advanced Python Object Model
+
+## Prompt 16 — Classes & Objects
+
+Start the Python OOP section.
+
+Teach me:
+
+* Classes
+* Objects
+* Attributes
+* Methods
+* Constructors
+* `__init__`
+* Instance variables
+* Class variables
+* Instance methods
+* Class methods
+* Static methods
+* Object creation
+
+Also introduce:
+
+* `__new__`
+* Difference between `__new__` and `__init__`
+* Object creation lifecycle
+
+Compare object-oriented and procedural programming.
+
+Include tricky examples, output questions, interview questions, and coding exercises.
+
+Test me before moving on.
+
+---
+
+## Prompt 17 — Magic/Dunder Methods
+
+Teach me Python's data model through common dunder methods:
+
+* `__str__`
+* `__repr__`
+* `__len__`
+* `__eq__`
+* `__lt__`
+* `__add__`
+* `__getitem__`
+* `__iter__`
+* `__next__`
+* `__contains__`
+* `__call__`
+* `__enter__`
+* `__exit__`
+
+Explain operator overloading and Python's data model.
+
+Teach me when to implement these methods and what contracts they imply.
+
+Give output-prediction problems and coding exercises.
+
+Test me before moving on.
+
+---
+
+## Prompt 18 — Encapsulation
+
+Teach me:
+
+* Encapsulation
+* Public conventions
+* `_protected` convention
+* `__private` convention
+* Name mangling
+* Properties
+* Getters/setters
+* `@property`
+* Property setters
+* Why encapsulation matters
+* Python's philosophy compared with languages having enforced access modifiers
+
+Include interview traps and coding exercises.
+
+Test me before moving on.
+
+---
+
+## Prompt 19 — Inheritance
+
+Teach me:
+
+* Single inheritance
+* Multilevel inheritance
+* Multiple inheritance
+* Method overriding
+* `super()`
+* Method Resolution Order (MRO)
+* C3 linearization at an interview-appropriate level
+* Diamond problem
+* Cooperative multiple inheritance
+
+Give output-prediction questions involving inheritance and `super()`.
+
+Test me before moving on.
+
+---
+
+## Prompt 20 — Polymorphism
+
+Teach me:
+
+* Polymorphism
+* Method overriding
+* Duck typing
+* Operator overloading
+* Runtime polymorphism
+* Compile-time vs runtime polymorphism
+* Protocol-based thinking
+* Python's dynamic nature
+
+Explain what an interviewer expects from an intermediate Python developer.
+
+Include tricky questions and coding exercises.
+
+Test me before moving on.
+
+---
+
+## Prompt 21 — Abstraction & Interfaces
+
+Teach me:
+
+* Abstraction
+* Abstract classes
+* `abc`
+* `ABC`
+* `@abstractmethod`
+* Abstract properties
+* Interfaces conceptually
+* Duck typing
+* Protocols
+
+Compare Python's approach with Java-style interfaces.
+
+Explain when to use:
+
+* Abstract base classes
+* Protocols
+* Duck typing
+
+Include design examples, interview questions, traps, and exercises.
+
+Test me before moving on.
+
+---
+
+## Prompt 22 — Dataclasses & Enums
+
+Teach me:
+
+### Dataclasses
+
+* `@dataclass`
+* Generated `__init__`
+* Generated `__repr__`
+* Equality
+* Default values
+* `field()`
+* `default_factory`
+* Frozen dataclasses
+* Ordering
+* When dataclasses are preferable to manually written classes
+
+### Enums
+
+* `Enum`
+* Enum members
+* Values
+* Comparison
+* Iteration
+* Practical use cases
+
+Include interview questions and coding exercises.
+
+Test me before moving on.
+
+---
+
+## Prompt 23 — Type Hints & typing
+
+Teach me Python type hints:
+
+* Basic annotations
+* `str`, `int`, `float`, `bool`
+* `list`
+* `dict`
+* `tuple`
+* `set`
+* `Optional`
+* `Union`
+* `Literal`
+* `Any`
+* `Callable`
+* `TypeVar`
+* Generic concepts
+* `typing`
+* Modern Python typing syntax
+* Return annotations
+* Type aliases
+* Static type checking conceptually
+
+Explain the difference between:
+
+**runtime behavior vs static type checking**
+
+Include interview questions and practical exercises.
+
+Test me before moving on.
+
+---
+
+# Part 4 — OOP Design
+
+## Prompt 24 — Composition vs Inheritance
+
+Teach me:
+
+* "is-a"
+* "has-a"
+* Composition
+* Inheritance
+* Coupling
+* Flexibility
+* Maintainability
+* Dependency relationships
+* When composition is preferable
+
+Give realistic examples.
+
+Ask me to redesign poor inheritance-based code using composition.
+
+Include interview questions and coding exercises.
+
+Test me before moving on.
+
+---
+
+## Prompt 25 — SOLID Principles
+
+Teach all five SOLID principles deeply:
+
+* SRP — Single Responsibility Principle
+* OCP — Open/Closed Principle
+* LSP — Liskov Substitution Principle
+* ISP — Interface Segregation Principle
+* DIP — Dependency Inversion Principle
+
+For each:
+
+1. Explain the principle.
+2. Show bad Python code.
+3. Identify the violation.
+4. Improve the design.
+5. Explain trade-offs.
+6. Give interview questions.
+
+Make me identify SOLID violations myself before showing the answer.
+
+Test me before moving on.
+
+---
+
+## Prompt 26 — Dependency Injection
+
+Teach:
+
+* Dependency injection
+* Dependency inversion
+* Constructor injection
+* Setter injection
+* Function-based injection
+* Dependency composition
+* Mocking conceptually
+* Testing benefits
+* Maintainability benefits
+
+Use realistic Python examples.
+
+Make me refactor tightly coupled code into dependency-injected code.
+
+Test me before moving on.
+
+---
+
+# Part 5 — Basic Data Structures
+
+## Prompt 27 — Arrays & Python Lists
+
+Teach:
+
+* Arrays conceptually
+* Python lists
+* Indexing
+* Slicing
+* Insertion
+* Deletion
+* Traversal
+* Searching
+* Copying
+* Mutability
+* List methods
+* List comprehensions
+* List capacity/amortized behavior at an interview-appropriate level
+* Time complexity of common operations
+
+Explain Python lists vs traditional arrays.
+
+Include interview questions and coding problems.
+
+Test me before moving on.
+
+---
+
+## Prompt 28 — Strings
+
+Teach:
+
+* String immutability
+* Indexing
+* Slicing
+* Concatenation
+* Searching
+* Frequency counting
+* Character processing
+* String methods
+* Formatting
+* Efficient string manipulation
+* Why repeated concatenation can be inefficient
+* `join()`
+
+Include common interview patterns and progressively harder coding problems.
+
+Test me before moving on.
+
+---
+
+## Prompt 29 — Linked Lists
+
+Teach from scratch:
+
+* Nodes
+* Singly linked lists
+* Doubly linked lists
+* Insertion
+* Deletion
+* Traversal
+* Searching
+* Reversing
+* Fast/slow pointers
+* Cycle detection
+* Time/space complexity
+
+Implement linked lists in Python and explain every step.
+
+Include common interview problems.
+
+Test me before moving on.
+
+---
+
+## Prompt 30 — Stacks
+
+Teach:
+
+* LIFO
+* Lists as stacks
+* `collections.deque`
+* Push
+* Pop
+* Peek
+* Complexity
+* Applications
+* Balanced parentheses
+* Expression evaluation
+* Monotonic stack concept
+
+Include coding exercises and interview questions.
+
+Test me before moving on.
+
+---
+
+## Prompt 31 — Queues
+
+Teach:
+
+* FIFO
+* `collections.deque`
+* Enqueue
+* Dequeue
+* Complexity
+* Circular queues conceptually
+* Real-world applications
+* Queue-based algorithms
+
+Include coding problems and interview questions.
+
+Test me before moving on.
+
+---
+
+## Prompt 32 — Hash Maps / Dictionaries
+
+Teach deeply:
+
+* Hash tables
+* Hash functions
+* Hashing
+* Buckets
+* Collisions
+* Key/value lookup
+* Average-case complexity
+* Worst-case considerations
+* Hashable objects
+* Dictionary methods
+* Dictionary views
+* Frequency counting
+* Lookup tables
+* Grouping patterns
+
+Explain why dictionary keys must be hashable.
+
+Include tricky interview questions and coding problems.
+
+Test me before moving on.
+
+---
+
+## Prompt 33 — Sets
+
+Teach:
+
+* Sets
+* Uniqueness
+* Membership testing
+* Hashing
+* Set operations
+* Union
+* Intersection
+* Difference
+* Symmetric difference
+* Hashability
+* Complexity
+* Practical interview patterns
+
+Include duplicate detection and intersection problems.
+
+Test me before moving on.
+
+---
+
+# Part 6 — Basic Algorithms
+
+## Prompt 34 — Linear Search
+
+Teach:
+
+* How linear search works
+* Best case
+* Average case
+* Worst case
+* Space complexity
+* Variations
+* When it is appropriate
+
+Give progressively harder coding problems.
+
+Test me before moving on.
+
+---
+
+## Prompt 35 — Binary Search
+
+Teach deeply:
+
+* Core idea
+* Sorted-array requirement
+* Iterative implementation
+* Recursive implementation
+* Boundary handling
+* Common bugs
+* Complexity
+* First occurrence
+* Last occurrence
+* Search on an answer space
+
+Give interview-level coding problems.
+
+Test me thoroughly.
+
+---
+
+## Prompt 36 — Sorting
+
+Teach:
+
+* Why sorting matters
+* Bubble sort
+* Selection sort
+* Insertion sort
+* Merge sort
+* Quicksort
+* Python `sorted()`
+* `.sort()`
+* Stability
+* In-place sorting
+* Time complexity
+* Space complexity
+* Key functions
+* Custom sorting
+
+Explain which sorting algorithms I actually need to know for interviews and why.
+
+Test me before moving on.
+
+---
+
+## Prompt 37 — Recursion
+
+Teach:
+
+* Base cases
+* Recursive cases
+* Call stack
+* Tracing recursive execution
+* Recursion vs iteration
+* Stack overflow
+* Recursive tree problems
+* Backtracking conceptually
+* Memoization basics
+
+Make me manually trace recursive execution.
+
+Give progressively harder problems.
+
+Test me before moving on.
+
+---
+
+## Prompt 38 — Two Pointers
+
+Teach:
+
+* Two-pointer technique
+* When it applies
+* Opposite-direction pointers
+* Same-direction pointers
+* Sorted arrays
+* Pair-sum problems
+* Removing duplicates
+* Linked-list applications
+
+Focus on recognizing the pattern and reasoning about why it works.
+
+Test me before moving on.
+
+---
+
+## Prompt 39 — Sliding Window
+
+Teach:
+
+* Fixed-size windows
+* Variable-size windows
+* Maintaining window state
+* Frequency maps
+* Longest substring problems
+* Shortest substring/subarray problems
+* Recognizing when sliding window applies
+
+Give progressively harder interview problems.
+
+Test me before moving on.
+
+---
+
+## Prompt 40 — Basic Traversal
+
+Teach traversal of:
+
+* Arrays
+* Strings
+* Linked lists
+* Trees
+* Graphs
+
+Introduce:
+
+* DFS
+* BFS
+* Stack-based traversal
+* Queue-based traversal
+* Recursive traversal
+
+Focus on recognizing traversal patterns and choosing the correct data structure.
+
+Test me before moving on.
+
+---
+
+# Part 7 — Python Concurrency & Asynchronous Programming
+
+## Prompt 41 — Threads, Processes & the GIL
+
+Teach:
+
+* Concurrency vs parallelism
+* Threads
+* Processes
+* CPU-bound work
+* I/O-bound work
+* Python's GIL
+* Why the GIL matters
+* When threads are useful
+* When processes are useful
+* `threading`
+* `multiprocessing`
+* Common concurrency misconceptions
+
+Explain the GIL specifically in the context of CPython.
+
+Give interview scenarios where I must choose threads vs processes.
+
+Test me before moving on.
+
+---
+
+## Prompt 42 — Multiprocessing
+
+Teach:
+
+* Process creation
+* Process isolation
+* Inter-process communication conceptually
+* `multiprocessing`
+* Process pools
+* CPU-bound workloads
+* Serialization/pickling considerations
+* Common pitfalls
+
+Compare multiprocessing with threading.
+
+Include coding exercises and interview questions.
+
+Test me before moving on.
+
+---
+
+## Prompt 43 — asyncio, async & await
+
+Teach:
+
+* Asynchronous programming
+* Event loops
+* Coroutines
+* `async`
+* `await`
+* `asyncio`
+* Cooperative multitasking
+* I/O-bound workloads
+* Blocking vs non-blocking code
+* Tasks
+* Concurrent coroutines
+* Common mistakes
+
+Explain why `asyncio` does not automatically make CPU-bound work faster.
+
+Give practical examples and interview scenarios.
+
+Test me before moving on.
+
+---
+
+# Part 8 — Testing, Logging & Application Development
+
+## Prompt 44 — Python Testing with pytest
+
+Teach me testing fundamentals using `pytest`:
+
+* Why testing matters
+* Test structure
+* Assertions
+* Test discovery
+* Fixtures
+* Parameterization
+* Setup/teardown concepts
+* Testing exceptions
+* Mocking conceptually
+* Unit tests
+* Integration tests
+* Test isolation
+* Edge cases
+* Testing maintainable code
+
+Give me buggy code and ask me to write tests that expose the bugs.
+
+Test me before moving on.
+
+---
+
+## Prompt 45 — Logging
+
+Teach Python logging:
+
+* Why `print()` is not a logging strategy
+* `logging`
+* Log levels
+* `DEBUG`
+* `INFO`
+* `WARNING`
+* `ERROR`
+* `CRITICAL`
+* Loggers
+* Handlers
+* Formatters
+* Basic configuration
+* Logging exceptions
+* Practical application logging
+
+Give realistic debugging/logging scenarios.
+
+Test me before moving on.
+
+---
+
+## Prompt 46 — Configuration & Environment Variables
+
+Teach:
+
+* Configuration vs code
+* Environment variables
+* `os.environ`
+* `os.getenv()`
+* Secrets vs normal configuration
+* `.env` conceptually
+* Configuration files
+* Defaults
+* Environment-specific configuration
+* Why secrets should not be hard-coded
+* Configuration management best practices
+
+Give me practical scenarios and interview questions.
+
+Test me before moving on.
+
+---
+
+## Prompt 47 — Profiling & Performance
+
+Teach me how to reason about Python performance:
+
+* Big-O review
+* Identifying bottlenecks
+* Profiling vs guessing
+* `timeit`
+* `cProfile`
+* `pstats` conceptually
+* Memory considerations
+* Algorithmic optimization
+* I/O bottlenecks
+* CPU bottlenecks
+* Avoiding premature optimization
+
+Give me deliberately slow Python programs and make me identify the bottleneck.
+
+Test me before moving on.
+
+---
+
+# Part 9 — Python Project & Environment Skills
+
+## Prompt 48 — Virtual Environments & Package Management
+
+Teach me:
+
+* Why virtual environments exist
+* `venv`
+* Creating/activating environments
+* `pip`
+* Installing packages
+* Updating packages
+* Dependency pinning
+* `requirements.txt`
+* Dependency isolation
+* Reproducible environments
+
+Explain common interview questions around Python environments.
+
+Test me before moving on.
+
+---
+
+## Prompt 49 — pyproject.toml & Modern Python Projects
+
+Teach me `pyproject.toml` at an interview-appropriate level:
+
+* What it is
+* Why it exists
+* Project metadata
+* Dependencies
+* Build configuration
+* Tool configuration
+* Modern Python project structure
+* Relationship with package managers/build tools conceptually
+
+Show me a realistic small Python project structure.
+
+Test me before moving on.
+
+---
+
+# Part 10 — Comprehensive Beginner/Intermediate Mastery Assessment
+
+## Prompt 50 — Python Mastery Assessment
+
+Do **not** teach me initially.
+
+Give me a comprehensive assessment covering:
+
+### Language fundamentals
+
+* Variables
+* Data types
+* Operators
+* Expressions
+* Conditionals
+* `match/case`
+* Loops
+* Functions
+* Scope
+* Exceptions
+* Input/output
+* Modules/packages
+* Debugging
+
+### Python fundamentals
+
+* Mutability
+* Immutability
+* Copying
+* Memory model
+* Reference counting
+* Garbage collection
+* Iterators
+* Generators
+* Decorators
+* Context managers
+* `*args` / `**kwargs`
+* Lambda
+* `map` / `filter` / `reduce`
+* Dunder methods
+
+### OOP
+
+* Classes/objects
+* `__init__`
+* `__new__`
+* `__str__`
+* `__repr__`
+* Encapsulation
+* Inheritance
+* Polymorphism
+* Abstraction
+* Interfaces
+* ABCs
+* Dataclasses
+* Enums
+* Composition
+* SOLID
+* Dependency injection
+
+### Type system
+
+* Type hints
+* `typing`
+* Static vs runtime typing
+
+### Data structures
+
+* Arrays/lists
+* Strings
+* Linked lists
+* Stacks
+* Queues
+* Dictionaries/hash maps
+* Sets
+
+### Algorithms
+
+* Linear search
+* Binary search
+* Sorting
+* Recursion
+* Two pointers
+* Sliding window
+* DFS/BFS/basic traversal
+
+### Concurrency
+
+* Threads
+* Processes
+* GIL
+* Multiprocessing
+* `asyncio`
+* `async`
+* `await`
+
+### Engineering skills
+
+* Virtual environments
+* Package management
+* `pyproject.toml`
+* Logging
+* Configuration
+* Environment variables
+* Profiling
+* `pytest`
+
+Use a mixture of:
+
+* Conceptual questions
+* Output-prediction questions
+* Debugging problems
+* Code-writing problems
+* Complexity questions
+* Design questions
+* "What would you choose and why?" scenarios
+* Interview-style follow-ups
+
+Start easy and progressively increase difficulty.
+
+**Do not reveal answers until I attempt each question.**
+
+Track my weak areas.
+
+After the complete assessment, give me:
+
+* Overall score
+* Topic-by-topic score
+* Strong areas
+* Weak areas
+* Critical misconceptions
+* Interview readiness assessment
+* Detailed revision plan
+* Recommended practice problems
+
+---
+
+# Part 11 — Beginner → Intermediate Mock Interview
+
+## Prompt 51 — Python Developer Mock Interview
+
+Conduct a realistic Python developer mock interview.
+
+Act exactly like an interviewer.
+
+Ask **one question at a time** and wait for my answer.
+
+Cover:
+
+* Python fundamentals
+* Python internals
+* Functions
+* OOP
+* Dunder methods
+* Data structures
+* Algorithms
+* Debugging
+* Testing
+* Concurrency
+* `asyncio`
+* Type hints
+* Package management
+* Logging/configuration
+* Basic system/design questions
+* Coding problems
+
+Ask follow-up questions whenever appropriate.
+
+Do not immediately tell me the answer.
+
+Evaluate:
+
+* Correctness
+* Communication
+* Depth
+* Problem-solving approach
+* Ability to reason aloud
+* Code quality
+* Complexity analysis
+* Python-specific knowledge
+* Ability to recognize trade-offs
+
+At the end, provide an interview-style evaluation containing:
+
+* Overall assessment
+* Strengths
+* Weaknesses
+* Red flags
+* Topics to revise
+* Coding weaknesses
+* Communication feedback
+* Whether I appear ready for a beginner/intermediate Python role
+
+---
+
+# Special Learning Commands
+
+Whenever I get stuck, I can say:
+
+> "I don't understand this concept. Explain it again using a simpler mental model, then give me 3 progressively harder examples and test me."
+
+When solving a coding problem:
+
+> "Don't give me the solution yet. Act as my interviewer and give me hints one at a time only when I need them."
+
+For revision:
+
+> "Quiz me on everything we've covered so far. Don't give answers until I attempt each question."
+
+For weak areas:
+
+> "Give me a targeted drill on my weakest Python topics. Start easy and progressively increase difficulty."
+
+For interview simulation:
+
+> "Switch to interviewer mode. Ask one question at a time and don't reveal the answer until I respond."
+
+For output practice:
+
+> "Give me 10 Python output-prediction questions. Don't show the answers until I attempt all 10."
+
+For debugging practice:
+
+> "Give me a broken Python program. Don't tell me what's wrong. Interview me through the debugging process."
+
+---
+
+# Important Rule
+
+Do **not** blindly move to the next topic.
+
+For every topic, follow:
+
+**Learn**
+↓
+**Examples**
+↓
+**Explain it myself**
+↓
+**Output questions**
+↓
+**Coding exercises**
+↓
+**Interview questions**
+↓
+**Mini-test**
+↓
+**Fix weaknesses**
+↓
+**Next topic**
+
+The goal is not to finish the roadmap quickly.
+
+The goal is for me to be able to **explain, predict, debug, design, and write Python code confidently in an interview.**
