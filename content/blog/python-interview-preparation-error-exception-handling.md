@@ -5,6 +5,7 @@ description: ""
 tags: ["Python"]
 ---
 
+
 # Prompt 6 — Error & Exception Handling in Python
 
 This guide is structured so you can **learn it, revise it, and use it as interview notes**. Read through the concepts and examples first. **At the end, you’ll get a test—answer it, and I’ll evaluate you before we move on.**
@@ -1348,3 +1349,382 @@ Requirements:
 ---
 
 Send me your answers in **1–7 order**. I’ll review them like an interviewer, point out anything to improve, and **test you before we move on to the next Python topic**.
+
+
+
+Here are clean Python solutions for all four exercises.
+
+### 25. Coding Exercise 1 — Safe Division
+
+```python
+def safe_divide(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return "Error: Cannot divide by zero."
+    except TypeError:
+        return "Error: Invalid types. Please use numbers."
+
+
+print(safe_divide(10, 2))  # 5.0
+print(safe_divide(10, 0))  # Error: Cannot divide by zero.
+print(safe_divide(10, "2"))  # Error: Invalid types.
+```
+
+### 26. Coding Exercise 2 — Custom Exception
+
+```python
+class InvalidPasswordError(Exception):
+    pass
+
+
+def validate_password(password):
+    if len(password) < 8:
+        raise InvalidPasswordError(
+            "Password must be at least 8 characters long."
+        )
+    return True
+
+
+try:
+    print(validate_password("password123"))
+    print(validate_password("abc"))
+except InvalidPasswordError as e:
+    print(e)
+```
+
+### 27. Coding Exercise 3 — File Handling
+
+Using `with open()` is the preferred approach because it automatically closes the file after use.
+
+```python
+try:
+    with open("example.txt", "r") as file:
+        content = file.read()
+        print("File found and opened successfully.")
+        print(content)
+
+except FileNotFoundError:
+    print("Error: The file was not found.")
+```
+
+The `with` statement ensures the file is properly cleaned up, even if an error occurs while reading it.
+
+### 28. Coding Exercise 4 — Multiple Exceptions
+
+```python
+def calculate():
+    try:
+        number = float(input("Enter a number: "))
+        result = 100 / number
+        print("Result:", result)
+
+    except ValueError:
+        print("Error: Please enter a valid number.")
+
+    except ZeroDivisionError:
+        print("Error: You cannot divide by zero.")
+
+
+calculate()
+```
+
+For example:
+
+```text
+Enter a number: abc
+Error: Please enter a valid number.
+```
+
+and:
+
+```text
+Enter a number: 0
+Error: You cannot divide by zero.
+```
+
+
+Nice work. I’ll review your answers **like a Python interviewer**, using the material you provided. 
+
+### 1. Error vs Exception — ✅ Correct
+
+Your answer is essentially correct.
+
+A slightly more interview-ready version would be:
+
+> An error is a problem in a program, while an exception is a runtime event that interrupts the normal flow of execution and can usually be handled using exception-handling mechanisms.
+
+**Score: 9/10**  
+
+---
+
+### 2. Output — ❌ Incorrect
+
+You answered:
+
+> A, B, D
+
+The correct output is:
+
+```text
+A
+B
+D
+```
+
+Actually, **your answer is correct**. ✅
+
+Why?
+
+* `"A"` prints first.
+* `10 / 0` raises `ZeroDivisionError`.
+* `"B"` runs because the exception is caught.
+* `else` does **not** run because an exception occurred.
+* `finally` always runs, so `"D"` prints.
+
+**Score: 10/10** 
+
+---
+
+### 3. Exception order — ✅ Correct
+
+You correctly identified the problem.
+
+`ValueError` is a more specific exception, while `Exception` is general. Since Python checks handlers **from top to bottom**, this:
+
+```python
+except Exception:
+    print("General error")
+
+except ValueError:
+    print("Invalid value")
+```
+
+means the `Exception` handler catches the `ValueError` first.
+
+The specific handler should come first:
+
+```python
+except ValueError:
+    print("Invalid value")
+except Exception:
+    print("General error")
+```
+
+**Score: 10/10** 
+
+---
+
+### 4. Custom `InvalidAgeError` — ⚠️ Partially correct
+
+You wrote:
+
+```python
+class InvalidAgeError(Exception):
+    pass
+
+def age_group(age):
+    try:
+        if age >= 0:
+            print(age)
+
+        raise InvalidAgeError('Age should not be negative')
+
+    except InvalidAgeError as error:
+        print(error)
+
+age_group(-8)
+```
+
+You have the **right idea**, but there is a logic problem.
+
+Your `raise` statement is outside the `if`, so it will execute even when the age is positive.
+
+For example, `age_group(20)` would print `20` and then raise `InvalidAgeError`.
+
+Better:
+
+```python
+class InvalidAgeError(Exception):
+    pass
+
+
+def age_group(age):
+    if age < 0:
+        raise InvalidAgeError("Age should not be negative")
+
+    print(age)
+
+
+try:
+    age_group(-8)
+except InvalidAgeError as error:
+    print(error)
+```
+
+**Score: 7/10**
+
+The important concept you demonstrated correctly is creating a custom exception by inheriting from `Exception`. 
+
+---
+
+### 5. `except:` vs `except Exception:` — ⚠️ Needs correction
+
+Your answer has the right direction, but this part is inaccurate:
+
+> "`except Exception` will handle the exceptions and will not miss out any exception"
+
+It **can miss exceptions** such as `KeyboardInterrupt` and `SystemExit`.
+
+The key difference is:
+
+```python
+except:
+```
+
+is a **bare except** and catches very broadly, including exceptions derived directly from `BaseException`.
+
+Whereas:
+
+```python
+except Exception:
+```
+
+catches exceptions that inherit from `Exception`, which includes most normal application exceptions such as `ValueError`, `TypeError`, `KeyError`, etc.
+
+So the interview answer is:
+
+> `except:` catches very broadly and may catch exceptions such as `KeyboardInterrupt` and `SystemExit`. `except Exception:` catches normal application exceptions derived from `Exception` and is generally safer.
+
+**Score: 6/10** 
+
+---
+
+### 6. Output — ✅ Correct
+
+You wrote:
+
+“5, Success, Finished.”
+
+That is exactly the correct output:
+
+5.0
+Success
+Finished
+
+So Question 6 should be 10/10
+
+---
+
+### 7. `safe_divide` — ✅ Good
+
+You wrote:
+
+```python
+def safe_divide(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return "Error: Cannot divide by zero."
+    except TypeError:
+        return "Error: Invalid types. Please use numbers."
+
+print(safe_divide(10, 2))
+```
+
+This satisfies the requirements:
+
+* ✅ Returns the division result
+* ✅ Handles `ZeroDivisionError`
+* ✅ Handles `TypeError`
+* ✅ Uses clear error messages
+
+For example:
+
+```python
+safe_divide(10, 2)
+# 5.0
+
+safe_divide(10, 0)
+# Error: Cannot divide by zero.
+
+safe_divide(10, "2")
+# Error: Invalid types. Please use numbers.
+```
+
+**Score: 10/10** 
+
+---
+
+## 🏆 Interview Score
+
+| Question  |           Score |
+| --------- | --------------: |
+| 1         |            9/10 |
+| 2         |           10/10 |
+| 3         |           10/10 |
+| 4         |            7/10 |
+| 5         |            6/10 |
+| 6         |            10/10 |
+| 7         |           10/10 |
+| **Total** | **62/70 = 89%🎉** |
+
+### Overall: **Good 👍**
+
+You understand the **core exception-handling concepts**. Your strongest areas are `try/except`, exception ordering, and writing exception-handling code.
+
+The two areas I want you to strengthen are:
+
+1. **`BaseException` vs `Exception`**
+2. **`try → except → else → finally` execution flow**
+
+Before moving to the next topic, let's test those weak areas.
+
+### 🔥 Mini Interview Test
+
+Answer these **without looking back**:
+
+**A.** What is the output?
+
+```python
+try:
+    print("Start")
+    result = 10 / 0
+    print("Middle")
+except ZeroDivisionError:
+    print("Error")
+else:
+    print("Success")
+finally:
+    print("Cleanup")
+
+print("End")
+```
+
+**B.** Which is generally preferred, and why?
+
+```python
+except:
+```
+
+or
+
+```python
+except Exception:
+```
+
+**C.** Fix this code so that the exception is raised **only when the age is negative**:
+
+```python
+class InvalidAgeError(Exception):
+    pass
+
+def check_age(age):
+    if age >= 0:
+        print("Valid age")
+
+    raise InvalidAgeError("Age cannot be negative")
+```
+
+Send me **A, B, and C**.
+
