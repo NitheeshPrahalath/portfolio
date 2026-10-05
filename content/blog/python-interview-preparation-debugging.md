@@ -2,7 +2,9 @@
 title: "Python Interview Preparation - Debugging"
 date: "2026-09-25"
 description: ""
+tags: ["Python"]
 ---
+
 
 # Python Debugging Fundamentals
 
